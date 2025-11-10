@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="scroll-smooth" th:lang="${#locale.toLanguageTag}" th:fragment="html (head,content)" xmlns:th="https://www.thymeleaf.org">
+<html class="scroll-smooth" th:lang="${#locale.toLanguageTag}" th:fragment="html (head,content,header,footer)" xmlns:th="https://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta content="IE=edge" http-equiv="X-UA-Compatible" />
@@ -12,8 +12,12 @@
     </th:block>
   </head>
   <body class="mx-auto w-full max-w-7xl px-4 transition-colors duration-300 md:px-8 dark:bg-gray-900 dark:text-white/70">
-    <th:block th:replace="~{modules/header}" />
+    <th:block th:if="${header != null}">
+      <th:block th:replace="~{modules/header}" />
+    </th:block>
     <th:block th:replace="${content}" />
-    <th:block th:replace="~{modules/footer}" />
+    <th:block th:if="${footer != null}">
+      <th:block th:replace="~{modules/footer}" />
+    </th:block>
   </body>
 </html>

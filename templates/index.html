@@ -1,5 +1,5 @@
 <!doctype html>
-<html th:replace="~{modules/layout :: html(title = ${site.title}, head = null,content = ~{::content})}" xmlns:th="https://www.thymeleaf.org">
+<html th:replace="~{modules/layout :: html(title = ${site.title}, header = 'default', footer = 'default', head = null,content = ~{::content})}" xmlns:th="https://www.thymeleaf.org">
   <th:block th:fragment="content">
     <th:block th:if="${theme.config.oIndex.Hero.style == 'newPost'}" th:with="posts=${postFinder.listAll()}">
       <th:block th:replace="~{modules/heroPost :: heroSection(${posts[0]})}" />

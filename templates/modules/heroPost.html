@@ -25,7 +25,7 @@
           </p>
         </div>
         <h2 class="text-2xl leading-[1.1] font-bold text-gray-900 md:text-4xl dark:text-white">
-          <a th:href="@{${post.status.permalink}}" class="transition-colors hover:text-blue-600 dark:hover:text-blue-400" th:text="${post.spec.title}">一隅 · BY 無.Flac</a>
+          <a th:href="@{${post.status.permalink}}" th:text="${post.spec.title}">一隅 · BY 無.Flac</a>
         </h2>
         <p class="text-sm leading-relaxed text-gray-600 md:text-base lg:text-lg dark:text-white/80" th:if="${post.status.excerpt}" th:utext="${post.status.excerpt}"></p>
         <div class="flex items-center gap-4 pt-2">

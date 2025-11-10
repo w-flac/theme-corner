@@ -1,7 +1,6 @@
 <!doctype html>
-<html th:replace="~{modules/layout :: html(title = |${singlePage.spec.title} - ${site.title}|, head = ~{::head},content = ~{::content})}" xmlns:th="https://www.thymeleaf.org">
+<html th:replace="~{modules/layout :: html(title = |${singlePage.spec.title} - ${site.title}|, header = 'default', footer = 'default', head = ~{::head},content = ~{::content})}" xmlns:th="https://www.thymeleaf.org">
   <th:block th:fragment="content">
-    <th:block th:replace="~{modules/header}" />
     <img alt="封面" class="mt-18 aspect-square h-48 w-full object-cover lg:h-80" th:src="${singlePage.spec.cover ?: #theme.assets('/images/hello_mego.webp')}" />
     <div class="mx-auto mt-6 max-w-7xl px-4 pb-8 sm:px-6 lg:mt-12 lg:px-8">
       <div class="grid grid-cols-1 gap-8 xl:grid-cols-4">
