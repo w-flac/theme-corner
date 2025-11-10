@@ -1,0 +1,19 @@
+# nonk8s
+apiVersion: theme.halo.run/v1alpha1
+kind: Theme
+metadata:
+  name: theme-corner
+spec:
+  displayName: 一隅
+  author:
+    name: 無.Flac
+    website: https://w-flac.org.cn
+  description: 在喧嚣的世界里，总要有一隅，容纳文字与思绪的微光。
+  logo:
+  homepage: https://www.itheme.net
+  repo:
+  issues:
+  settingName: "theme-corner-setting"
+  configMapName: "theme-corner-configMap"
+  version: 0.0.1
+  requires: ">=2.20.0"

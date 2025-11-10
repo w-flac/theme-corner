@@ -1,0 +1,19 @@
+<!doctype html>
+<html class="scroll-smooth" th:lang="${#locale.toLanguageTag}" th:fragment="html (head,content)" xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta content="width=device-width, initial-scale=1, minimum-scale=1" name="viewport" />
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" th:href="@{/assets/css/style.css?v={version}(version=${theme.spec.version})}" />
+    <script th:src="@{/assets/js/main.js?v={version}(version=${theme.spec.version})}"></script>
+    <th:block th:if="${head != null}">
+      <th:block th:replace="${head}" />
+    </th:block>
+  </head>
+  <body class="mx-auto w-full max-w-7xl px-4 transition-colors duration-300 md:px-8 dark:bg-gray-900 dark:text-white/70">
+    <th:block th:replace="~{modules/header}" />
+    <th:block th:replace="${content}" />
+    <th:block th:replace="~{modules/footer}" />
+  </body>
+</html>

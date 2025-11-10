@@ -1,0 +1,20 @@
+@theme{
+    --color-primary: #53b175;
+    --spacing-112: 28rem;
+    --spacing-120: 30rem;
+    --spacing-128: 32rem;
+}
+
+@layer components {
+}
+
+@layer utilities {
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+}

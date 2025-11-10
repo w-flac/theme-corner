@@ -1,0 +1,45 @@
+<!-- Hero模板片段 -->
+<th:block th:fragment="heroSection(post)">
+  <section class="pt-28 pb-16 md:pt-36" th:attr="id=${post.metadata.name}">
+    <div class="flex flex-col gap-4 rounded-3xl bg-gray-400/10 p-4 transition-colors duration-300 md:flex-row md:items-center md:gap-6 md:p-6 lg:gap-14 lg:p-14 dark:bg-white/5">
+      <div class="w-full shrink-0 md:w-1/2">
+        <img
+          th:if="${not #strings.isEmpty(post.spec.cover)}"
+          th:src="${post.spec.cover}"
+          th:alt="${post.spec.title}"
+          th:srcset="|${thumbnail.gen(post.spec.cover, 's')} 400w,
+                ${thumbnail.gen(post.spec.cover, 'm')} 800w,
+                ${thumbnail.gen(post.spec.cover, 'l')} 1200w,
+                ${thumbnail.gen(post.spec.cover, 'xl')} 1600w|"
+          sizes="(max-width: 1600px) 100vw, 1600px"
+          class="h-60 w-full rounded-2xl object-cover md:h-72 xl:h-90"
+        />
+        <img class="h-60 w-full rounded-2xl object-cover md:h-72 xl:h-90" th:src="${#theme.assets('/images/blog.avif')}" th:if="${#strings.isEmpty(post.spec.cover)}" />
+      </div>
+
+      <div class="flex w-full flex-col justify-center gap-3 p-2 md:w-1/2 md:gap-4 md:p-0 lg:gap-6">
+        <div class="flex items-center gap-2">
+          <span class="hidden h-px w-3 bg-gray-400 md:block dark:bg-white/20"></span>
+          <p class="text-xs font-semibold tracking-[0.15em] text-gray-500 uppercase dark:text-white/50" th:text="${#temporals.format(post.spec.publishTime, 'yyyy-MM-dd')}">
+            2025-11-07
+          </p>
+        </div>
+        <h2 class="text-2xl leading-[1.1] font-bold text-gray-900 md:text-4xl dark:text-white">
+          <a th:href="@{${post.status.permalink}}" class="transition-colors hover:text-blue-600 dark:hover:text-blue-400" th:text="${post.spec.title}">一隅 · BY 無.Flac</a>
+        </h2>
+        <p class="text-sm leading-relaxed text-gray-600 md:text-base lg:text-lg dark:text-white/80" th:if="${post.status.excerpt}" th:utext="${post.status.excerpt}"></p>
+        <div class="flex items-center gap-4 pt-2">
+          <a
+            th:href="@{${post.status.permalink}}"
+            class="flex items-center gap-1.5 text-xs font-medium text-gray-900 transition-all duration-300 hover:opacity-70 md:text-base dark:text-white"
+          >
+            阅读更多
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</th:block>

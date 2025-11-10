@@ -1,0 +1,9 @@
+<!doctype html>
+<html
+  th:replace="~{modules/layout :: html(title = |${category.spec.displayName} - ${site.title}|, content = ~{::content}, head = null, footer = null, sidebar = ~{::sidebar}, contentClass = '')}"
+  xmlns:th="https://www.thymeleaf.org"
+>
+  <th:block th:fragment="content">
+
+  </th:block>
+</html>

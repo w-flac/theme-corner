@@ -1,0 +1,318 @@
+apiVersion: v1alpha1
+kind: Setting
+metadata:
+  name: theme-corner-setting
+spec:
+  forms:
+    - group: oIndex
+      label: 基础模块
+      formSchema:
+        - $formkit: group
+          label: Hero模块
+          name: Hero
+          children:
+            - $formkit: select
+              name: style
+              id: style
+              label: 样式
+              options:
+                - label: 最新文章
+                  value: newPost
+                - label: 自定义文章
+                  value: customPost
+            - $formkit: postSelect
+              name: heroPost
+              label: 选择文章
+              if: $get(style).value == 'customPost'
+              validation: required
+              value: ""
+        - $formkit: group
+          label: 最新文章
+          name: Blog
+          children:
+            - $formkit: text
+              name: blogTitle
+              label: 标题
+              value: ""
+            - $formkit: text
+              name: blogDesc
+              label: 描述
+              value: ""
+            - $formkit: select
+              name: blogStyle
+              label: 显示条数
+              value: 5
+              options:
+                - label: 5
+                  value: 5
+                - label: 8
+                  value: 8
+
+    - group: oCat
+      label: 分类模块
+      formSchema:
+        - $formkit: checkbox
+          name: oCat_enabled
+          id: oCat_enabled
+          key: oCat_enabled
+          label: 启用分类展示
+        - $formkit: group
+          label: 分类展示
+          name: Category
+          if: $get(oCat_enabled).value
+          children:
+            - $formkit: text
+              name: categoryTitle
+              label: 标题
+              value: ""
+            - $formkit: text
+              name: categoryDesc
+              label: 描述
+              value: ""
+            - $formkit: repeater
+              name: categoryList
+              label: 分类选择
+              value: [ ]
+              children:
+                - $formkit: text
+                  name: categoryItem_title
+                  label: 分类标题
+                  value: ""
+                  validation: required
+                - $formkit: text
+                  name: categoryItem_desc
+                  label: 描述
+                  value: ""
+                  validation: required
+                - $formkit: categorySelect
+                  name: categoryItem_list
+                  label: 子分类
+                  multiple: true
+                  value: [ ]
+
+    - group: oFriends
+      label: 链接模块
+      formSchema:
+          - $formkit: checkbox
+            name: friends_enabled
+            id: friends_enabled
+            key: friends_enabled
+            label: 启用链接展示
+          - $formkit: group
+            label: 链接展示
+            name: Friends
+            if: $get(friends_enabled).value
+            children:
+              - $formkit: text
+                name: friendsTitle
+                label: 标题
+                value: ""
+              - $formkit: text
+                name: friendsDesc
+                label: 描述
+                value: ""
+              - $formkit: select
+                name: friendsStyle
+                id: friendsStyle
+                key: friendsStyle
+                label: 样式
+                value: links
+                options:
+                  - label: 链接/Links
+                    value: links
+                  - label: 自定义
+                    value: custom
+              - $formkit: text
+                name: links
+                label: 标识
+                help: 请在链接插件页面中复制唯一标识，例如：link-group-xxxx
+                value: ""
+                validation: required
+                if: $get(friendsStyle).value == 'links'
+          - $formkit: group
+            label: 自定义选项
+            name: Custom
+            if: $get(friendsStyle).value == 'custom'
+            children:
+              - $formkit: repeater
+                name: customLinks
+                label: 链接
+                value: [ ]
+                children:
+                  - $formkit: text
+                    name: customLink_icon
+                    label: 图标
+                    value: ""
+                    validation: required
+                  - $formkit: text
+                    name: customLink_tag
+                    label: 标签
+                    validation: required
+                  - $formkit: text
+                    name: customLink_title
+                    label: 标题
+                    value: ""
+                    validation: required
+                  - $formkit: text
+                    name: customLink_desc
+                    label: 描述
+                  - $formkit: text
+                    name: customLink_url
+                    label: 链接
+                    value: ""
+                    validation: required
+                  - $formkit: text
+                    name: customLink_time
+                    label: 时间
+                    value: ""
+                    validation: required
+
+    - group: oInfo
+      label: 关于模块
+      formSchema:
+        - $formkit: checkbox
+          name: info_enabled
+          id: info_enabled
+          key: info_enabled
+          label: 启用关于展示
+        - $formkit: group
+          label: 关于展示
+          name: Info
+          if: $get(info_enabled).value
+          children:
+            - $formkit: text
+              name: infoTitle
+              label: 标题
+              value: ""
+            - $formkit: text
+              name: infoDesc
+              label: 描述
+              value: ""
+        - $formkit: group
+          label: 个人信息
+          name: infoUser
+          id: infoUser
+          key: infoUser
+          if: $get(info_enabled).value
+          children:
+            - $formkit: attachment
+              accepts:
+                - 'image/*'
+              name: infoUser_logo
+              label: 头像
+              value: ''
+              validation: required
+            - $formkit: text
+              name: infoUser_name
+              label: 昵称
+              value: ""
+              validation: required
+            - $formkit: text
+              name: infoUser_tag
+              label: 标签
+              value: ""
+              validation: required
+            - $formkit: text
+              name: infoUser_desc
+              label: 描述
+              value: ""
+              validation: required
+        - $formkit: group
+          label: 社交信息
+          name: infoSocial
+          id: infoSocial
+          key: infoSocial
+          if: $get(info_enabled).value
+          children:
+            - $formkit: text
+              name: infoSocial_title
+              label: 标题
+              value: ""
+              validation: required
+            - $formkit: repeater
+              name: socialList
+              label: 社交信息
+              value: [ ]
+              children:
+                - $formkit: text
+                  name: socialItem_title
+                  label: 标题
+                  value: ""
+                  validation: required
+                - $formkit: text
+                  name: socialItem_url
+                  label: 链接
+                  value: ""
+                  validation: required
+                - $formkit: code
+                  name: socialItem_icon
+                  label: 图标
+                  language: html
+                  height: 200px
+                  help: 请输入SVG链接，建议height和width：15
+                  value: ""
+                  validation: required
+
+        - $formkit: group
+          label: 其它信息
+          name: infoOther
+          if: $get(info_enabled).value
+          children:
+            - $formkit: text
+              name: infoOther_title
+              label: 标题
+              value: ""
+              validation: required
+            - $formkit: code
+              name: infoOther_desc
+              label: 描述
+              height: 200px
+              language: html
+              validation: required
+
+        - $formkit: group
+          label: 近期动向
+          name: infoTrend
+          id: infoTrend
+          key: infoTrend
+          if: $get(info_enabled).value
+          children:
+              - $formkit: text
+                name: infoTrend_title
+                label: 标题
+                value: ""
+                validation: required
+              - $formkit: code
+                name: infoTrend_desc
+                label: 描述
+                height: 200px
+                language: html
+                validation: required
+
+    - group: oFooter
+      label: 页脚
+      formSchema:
+        - $formkit: checkbox
+          name: beian_enabled
+          id: beian_enabled
+          key: beian_enabled
+          label: 开启备案信息
+          value: false
+        - $formkit: group
+          name: beian_items
+          id: beian_items
+          key: beian_items
+          if: $get(beian_enabled).value
+          label: 备案信息设置
+          children:
+            - $formkit: text
+              name: icp
+              id: icp
+              key: icp
+              label: ICP备案
+            - $formkit: text
+              name: gongan
+              id: gongan
+              key: gongan
+              label: 公安备案
+

@@ -1,0 +1,108 @@
+<header class="fixed top-6 left-1/2 z-50 w-[calc(100%-3rem)] max-w-5xl -translate-x-1/2 rounded-full bg-gray-900 backdrop-blur-sm dark:bg-gray-100">
+  <div class="w-full px-4 py-2 md:px-6 lg:px-8">
+    <nav class="flex items-center justify-between">
+      <div class="flex shrink-0 items-center space-x-2 lg:w-1/5">
+        <button id="mobile-menu-toggle" class="block text-white active:scale-95 lg:hidden dark:text-black">
+          <svg id="mobile-menu-icon" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"></svg>
+        </button>
+        <a class="rounded-lg" th:href="${site.url}">
+          <img alt="logo" src="https://www.itheme.net/upload/itheme.png" class="h-8 object-cover" />
+        </a>
+      </div>
+      <ul class="hidden w-3/5 items-center justify-center gap-4 font-medium text-white lg:flex dark:text-black" th:with="menu = ${menuFinder.getPrimary()}">
+        <th:block th:each="menuItem,iter : ${menu.menuItems}">
+          <li th:if="${#lists.isEmpty(menuItem.children)}" th:attr="id=|${menuItem.metadata.name}|">
+            <a th:href="@{${menuItem.status.href}}" th:target="${menuItem.spec.target?.value}" th:text="${menuItem.status.displayName}" class="block px-4 py-1 leading-8"></a>
+          </li>
+          <li th:unless="${#lists.isEmpty(menuItem.children)}" th:attr="id=|${menuItem.metadata.name}|">
+            <a href="#" class="flex items-center gap-1 px-4 py-1 leading-8">
+              <span th:target="${menuItem.spec.target?.value}" th:text="${menuItem.status.displayName}">前往</span>
+              <svg class="w-4 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor">
+                <path
+                  d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z"
+                />
+              </svg>
+            </a>
+          </li>
+        </th:block>
+      </ul>
+      <div class="flex w-1/5 items-center justify-end gap-3">
+        <!-- 搜索按钮 -->
+        <a
+          class="text-white transition-transform duration-200 active:scale-95 dark:text-gray-900"
+          aria-label="搜索"
+          href="javascript:SearchWidget.open()"
+          th:if="${pluginFinder.available('PluginSearchWidget')}"
+        >
+          <svg t="1762755985473" class="icon h-6 w-6" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3495" width="100%" height="100%">
+            <path
+              d="M797.525333 752.266667c62.069333-72.736 97.28-165.002667 97.28-262.186667C894.816 266.528 713.621333 85.333333 490.08 85.333333 266.538667 85.333333 85.333333 266.538667 85.333333 490.069333 85.333333 713.610667 266.538667 894.826667 490.069333 894.826667a404.693333 404.693333 0 0 0 118.208-17.546667 32 32 0 0 0-18.666666-61.216 340.693333 340.693333 0 0 1-99.541334 14.762667C301.888 830.816 149.333333 678.261333 149.333333 490.069333 149.333333 301.888 301.888 149.333333 490.069333 149.333333 678.261333 149.333333 830.826667 301.888 830.826667 490.069333c0 89.28-35.381333 173.696-97.141334 237.322667a36.992 36.992 0 0 0 0.384 51.925333l149.973334 149.973334a32 32 0 0 0 45.258666-45.248L797.525333 752.266667z"
+              fill="currentColor"
+              p-id="3496"
+            ></path>
+          </svg>
+        </a>
+        <!-- 主题切换按钮 -->
+        <button class="flex items-center gap-2 text-white transition-transform duration-200 active:scale-95 dark:text-gray-900">
+          <svg id="theme-dark" class="hidden h-6 w-6 transition-colors duration-300 ease-in-out dark:text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <g fill="currentColor" fill-opacity="0">
+              <path d="M15.22 6.03l2.53-1.94L14.56 4L13.5 1l-1.06 3l-3.19.09l2.53 1.94l-.91 3.06l2.63-1.81l2.63 1.81z">
+                <animate id="SVGRJdelbWr" fill="freeze" attributeName="fill-opacity" begin="0.7s;SVGRJdelbWr.begin+6s" dur="0.4s" values="0;1" />
+                <animate fill="freeze" attributeName="fill-opacity" begin="SVGRJdelbWr.begin+2.2s" dur="0.4s" values="1;0" />
+              </path>
+              <path d="M13.61 5.25L15.25 4l-2.06-.05L12.5 2l-.69 1.95L9.75 4l1.64 1.25l-.59 1.98l1.7-1.17l1.7 1.17z">
+                <animate fill="freeze" attributeName="fill-opacity" begin="SVGRJdelbWr.begin+3s" dur="0.4s" values="0;1" />
+                <animate fill="freeze" attributeName="fill-opacity" begin="SVGRJdelbWr.begin+5.2s" dur="0.4s" values="1;0" />
+              </path>
+              <path d="M19.61 12.25L21.25 11l-2.06-.05L18.5 9l-.69 1.95l-2.06.05l1.64 1.25l-.59 1.98l1.7-1.17l1.7 1.17z">
+                <animate fill="freeze" attributeName="fill-opacity" begin="SVGRJdelbWr.begin+0.4s" dur="0.4s" values="0;1" />
+                <animate fill="freeze" attributeName="fill-opacity" begin="SVGRJdelbWr.begin+2.8s" dur="0.4s" values="1;0" />
+              </path>
+              <path d="M20.828 9.731l1.876-1.439l-2.366-.067L19.552 6l-.786 2.225l-2.366.067l1.876 1.439L17.601 12l1.951-1.342L21.503 12z">
+                <animate fill="freeze" attributeName="fill-opacity" begin="SVGRJdelbWr.begin+3.4s" dur="0.4s" values="0;1" />
+                <animate fill="freeze" attributeName="fill-opacity" begin="SVGRJdelbWr.begin+5.6s" dur="0.4s" values="1;0" />
+              </path>
+            </g>
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-dasharray="56"
+              stroke-dashoffset="56"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M7 6 C7 12.08 11.92 17 18 17 C18.53 17 19.05 16.96 19.56 16.89 C17.95 19.36 15.17 21 12 21 C7.03 21 3 16.97 3 12 C3 8.83 4.64 6.05 7.11 4.44 C7.04 4.95 7 5.47 7 6 Z"
+            >
+              <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="56;0" />
+            </path>
+          </svg>
+          <svg id="theme-light" class="h-6 w-6 text-orange-400 transition-colors duration-300 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+              <path stroke-dasharray="36" stroke-dashoffset="36" d="M12 7c2.76 0 5 2.24 5 5c0 2.76 -2.24 5 -5 5c-2.76 0 -5 -2.24 -5 -5c0 -2.76 2.24 -5 5 -5">
+                <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="36;0" />
+              </path>
+              <path stroke-dasharray="2" stroke-dashoffset="2" d="M12 19v1M19 12h1M12 5v-1M5 12h-1" opacity="0">
+                <animate fill="freeze" attributeName="d" begin="0.6s" dur="0.2s" values="M12 19v1M19 12h1M12 5v-1M5 12h-1;M12 21v1M21 12h1M12 3v-1M3 12h-1" />
+                <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="2;0" />
+                <set fill="freeze" attributeName="opacity" begin="0.6s" to="1" />
+                <animateTransform attributeName="transform" dur="30s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12" />
+              </path>
+              <path stroke-dasharray="2" stroke-dashoffset="2" d="M17 17l0.5 0.5M17 7l0.5 -0.5M7 7l-0.5 -0.5M7 17l-0.5 0.5" opacity="0">
+                <animate
+                  fill="freeze"
+                  attributeName="d"
+                  begin="0.8s"
+                  dur="0.2s"
+                  values="M17 17l0.5 0.5M17 7l0.5 -0.5M7 7l-0.5 -0.5M7 17l-0.5 0.5;M18.5 18.5l0.5 0.5M18.5 5.5l0.5 -0.5M5.5 5.5l-0.5 -0.5M5.5 18.5l-0.5 0.5"
+                />
+                <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.8s" dur="0.2s" values="2;0" />
+                <set fill="freeze" attributeName="opacity" begin="0.8s" to="1" />
+                <animateTransform attributeName="transform" dur="30s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12" />
+              </path>
+            </g>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
