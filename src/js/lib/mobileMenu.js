@@ -1,50 +1,63 @@
 /**
- * 移动端菜单按钮动画切换
+ * 移动端菜单按钮动画切换和菜单显示控制
  */
 document.addEventListener("DOMContentLoaded", () => {
-  const menuToggle = document.getElementById("mobile-menu-toggle");
-  let menuIcon = document.getElementById("mobile-menu-icon");
-  let isMenuOpen = false;
+  const menuToggle = document.getElementById("mobile-btn");
+  const menuPanel = document.getElementById("mobile-menu-panel");
+  const iconBar = document.getElementById("icon-bar");
+  const iconClose = document.getElementById("icon-close");
 
-  if (!menuToggle || !menuIcon) return;
+  if (!menuToggle) return;
 
-  const staticMenuIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5L12 5L19 5M5 12H19M5 19L12 19L19 19"/></svg>`;
+  const openMenu = () => {
+    // 禁止body滚动
+    document.body.classList.add("overflow-hidden");
 
-  const menuIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5L12 5L19 5M5 12H19M5 19L12 19L19 19"><animate fill="freeze" attributeName="d" dur="0.4s" values="M5 5L12 5L19 5M5 12H19M5 19L12 19L19 19;M5 5L12 12L19 5M12 12H12M5 19L12 12L19 19"/></path></svg>`;
+    menuPanel.classList.remove("pointer-events-none");
+    menuPanel.classList.add("pointer-events-auto");
 
-  const xIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5L12 12L19 5M12 12H12M5 19L12 12L19 19"><animate fill="freeze" attributeName="d" dur="0.4s" values="M5 5L12 12L19 5M12 12H12M5 19L12 12L19 19;M5 5L12 5L19 5M5 12H19M5 19L12 19L19 19"/></path></svg>`;
+    menuPanel.offsetHeight;
 
-  const initSVG = () => {
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = staticMenuIconSVG;
-    const newSVG = tempDiv.firstElementChild;
-    newSVG.id = "mobile-menu-icon";
-    newSVG.className = "h-6 w-6";
-    menuIcon.parentNode.replaceChild(newSVG, menuIcon);
-    menuIcon = document.getElementById("mobile-menu-icon");
+    menuPanel.classList.remove("opacity-0", "scale-95");
+    menuPanel.classList.add("opacity-100", "scale-100");
+
+    const hideMenu = (event) => {
+      if (!menuToggle.contains(event.target) && !menuPanel.contains(event.target)) {
+        closeMenu();
+        document.removeEventListener("click", hideMenu);
+      }
+    };
+    setTimeout(() => {
+      document.addEventListener("click", hideMenu);
+    }, 100);
   };
 
-  initSVG();
+  const closeMenu = () => {
+    // 恢复body滚动
+    document.body.classList.remove("overflow-hidden");
+
+    menuPanel.classList.remove("opacity-100", "scale-100");
+    menuPanel.classList.add("opacity-0", "scale-95");
+
+    setTimeout(() => {
+      menuPanel.classList.remove("pointer-events-auto");
+      menuPanel.classList.add("pointer-events-none");
+    }, 200); // 匹配动画时间
+  };
 
   menuToggle.addEventListener("click", () => {
-    // 切换状态
-    isMenuOpen = !isMenuOpen;
+    const isHidden = menuPanel.classList.contains("pointer-events-none");
 
-    const newSVGHTML = isMenuOpen ? menuIconSVG : xIconSVG;
-
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = newSVGHTML;
-    const newSVG = tempDiv.firstElementChild;
-
-    newSVG.id = "mobile-menu-icon";
-    newSVG.className = "h-6 w-6";
-
-    menuIcon.parentNode.replaceChild(newSVG, menuIcon);
-
-    menuIcon = document.getElementById("mobile-menu-icon");
-
-    if (menuIcon) {
-      menuIcon.offsetHeight;
+    if (isHidden) {
+      // 打开菜单：立即显示X图标
+      iconBar.classList.add("hidden");
+      iconClose.classList.remove("hidden");
+      openMenu();
+    } else {
+      // 关闭菜单：显示菜单图标
+      iconBar.classList.remove("hidden");
+      iconClose.classList.add("hidden");
+      closeMenu();
     }
   });
 });

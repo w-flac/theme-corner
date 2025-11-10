@@ -8,6 +8,30 @@ spec:
       label: 基础模块
       formSchema:
         - $formkit: group
+          label: LOGO展示
+          name: sideWeb
+          children:
+            - $formkit: select
+              name: site_enabled
+              id: site_enabled
+              key: site_enabled
+              value: "default"
+              label: 类型
+              options:
+                - label: 默认
+                  value: "default"
+                - label: 自定义
+                  value: "custom"
+            - $formkit: attachment
+              if: $get(site_enabled).value === 'custom'
+              accepts:
+                - 'image/*'
+              name: custom_logo
+              id: custom_logo
+              key: custom_logo
+              label: Logo
+              value: ''
+        - $formkit: group
           label: Hero模块
           name: Hero
           children:

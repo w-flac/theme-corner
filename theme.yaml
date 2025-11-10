@@ -9,11 +9,11 @@ spec:
     name: 無.Flac
     website: https://w-flac.org.cn
   description: 在喧嚣的世界里，总要有一隅，容纳文字与思绪的微光。
-  logo:
+  logo: /themes/theme-corner/assets/images/corner.webp
   homepage: https://www.itheme.net
-  repo:
-  issues:
+  repo: https://github.com/w-flac/theme-corner
+  issues: https://github.com/w-flac/theme-corner/issues
   settingName: "theme-corner-setting"
   configMapName: "theme-corner-configMap"
-  version: 0.0.1
+  version: 1.0.0beta1
   requires: ">=2.20.0"

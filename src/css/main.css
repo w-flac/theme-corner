@@ -53,3 +53,6 @@
     content: "#";
     @apply mr-1 opacity-80;
 }
+.post-tag :where(code) {
+    @apply wrap-break-word break-all;
+}

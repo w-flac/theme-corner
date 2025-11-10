@@ -30,8 +30,8 @@ class Upvote {
 
     try {
       const response = await fetch(this.apiEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ group: this.group, plural: this.plural, name: itemName }),
       });
 
@@ -74,7 +74,7 @@ class Upvote {
       // 替换心形图标为红色实心心形
       const svg = btn.querySelector("svg");
       if (svg) {
-        svg.outerHTML = `<svg class="h-3.5 w-3.5 md:h-4.5 md:w-4.5" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+        svg.outerHTML = `<svg class="size-5" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
           <path d="M667.786667 117.333333C832.864 117.333333 938.666667 249.706667 938.666667 427.861333c0 138.250667-125.098667 290.506667-371.573334 461.589334a96.768 96.768 0 0 1-110.186666 0C210.432 718.368 85.333333 566.112 85.333333 427.861333 85.333333 249.706667 191.136 117.333333 356.213333 117.333333c59.616 0 100.053333 20.832 155.786667 68.096C567.744 138.176 608.170667 117.333333 667.786667 117.333333z" fill="#ed4832"/>
         </svg>`;
       }
@@ -82,11 +82,10 @@ class Upvote {
   }
 }
 // 自动初始化点赞功能
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   // 检查页面上是否有点赞按钮
-  const hasArticleButton = document.querySelector('[data-article-name]');
-  const hasPageButton = document.querySelector('[data-page-name]');
-
+  const hasArticleButton = document.querySelector("[data-article-name]");
+  const hasPageButton = document.querySelector("[data-page-name]");
 
   if (hasArticleButton) {
     // 文章页面点赞
