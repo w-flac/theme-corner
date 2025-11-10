@@ -25,7 +25,9 @@
           th:title="|分类：${showPageCategory ? category.spec.displayName : post.categories[0].spec.displayName}|"
         ></a>
       </div>
-      <h4 class="mt-2 text-xl leading-tight font-normal text-gray-900 dark:text-white/90" th:text="${post.spec.title}"></h4>
+      <a th:href="@{${post.status.permalink}}">
+        <h4 class="mt-2 text-xl leading-tight font-normal text-gray-900 dark:text-white/90" th:text="${post.spec.title}"></h4>
+      </a>
       <p class="mt-2 line-clamp-3 overflow-hidden text-sm leading-relaxed text-gray-600 dark:text-white/70" th:text="${post.status.excerpt}"></p>
       <div class="mt-6 flex items-center justify-between">
         <a th:href="@{${post.status.permalink}}" class="inline-flex items-center gap-1 text-xs font-medium text-gray-900 dark:text-white">阅读全文</a>

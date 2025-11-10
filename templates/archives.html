@@ -15,9 +15,9 @@
         <span class="mx-2 h-10 w-px bg-gray-400 md:h-6 dark:bg-white/50"></span>
         <p class="text-xs text-gray-500 md:text-sm dark:text-white/60">在城市的角落里，收集那些温柔的故事与思绪，让每一次点开都像回到自己的一隅小世界。</p>
       </div>
-      <ul class="mt-10 space-y-6">
-        <th:block>
-          <th:block th:replace="~{modules/otherPost :: postBlog(posts = ${post}, showPageCategory = false)}"></th:block>
+      <ul class="mt-10 space-y-6" th:each="archive : ${archives.items}">
+        <th:block th:each="month : ${archive.months}">
+          <th:block th:replace="~{modules/otherPost :: postBlog(posts = ${month.posts}, showPageCategory = false)}"></th:block>
         </th:block>
       </ul>
       <th:block th:replace="~{modules/otherPost :: postPage(pages = ${archives})}"></th:block>
