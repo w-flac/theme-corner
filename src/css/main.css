@@ -1,11 +1,24 @@
+/* 自定义字体 */
+@font-face {
+  font-family: 'CustomFont';
+  src: url('../fonts/font.woff2') format('woff2'),
+       url('../fonts/font.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: optional;
+}
+
 @theme{
     --color-primary: #53b175;
     --spacing-112: 28rem;
     --spacing-120: 30rem;
     --spacing-128: 32rem;
+    --font-family-sans: 'CustomFont', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
-
-@layer components {
+@layer base {
+    * {
+        font-family: 'CustomFont', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
 }
 
 @layer utilities {
@@ -17,4 +30,26 @@
     .scrollbar-hide::-webkit-scrollbar {
         display: none;
     }
+
+}
+
+.prose :where(blockquote p,code)::before,
+.prose :where(blockquote p,code)::after {
+    content: "";
+}
+.prose :where(table) {
+    @apply w-full!;
+}
+.prose :where(td,th,hr,table,tr,tr td) {
+    @apply border border-gray-200! dark:border-white/30!;
+}
+.prose :where(blockquote p ,a,h1,h2,h3,h4,h5,h6,p,code,span) {
+    @apply not-italic font-normal text-gray-800 dark:text-white/90;
+}
+.prose :where(img) {
+    @apply my-0 aspect-auto object-contain rounded-xl;
+}
+.post-tag :where(a.tag)::before {
+    content: "#";
+    @apply mr-1 opacity-80;
 }

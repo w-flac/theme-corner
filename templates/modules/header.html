@@ -9,7 +9,7 @@
           <img alt="logo" src="https://www.itheme.net/upload/itheme.png" class="h-8 object-cover" />
         </a>
       </div>
-      <ul class="hidden w-3/5 items-center justify-center gap-4 font-medium text-white lg:flex dark:text-black" th:with="menu = ${menuFinder.getPrimary()}">
+      <ul class="hidden w-3/5 items-center justify-center gap-4 text-base font-normal text-white lg:flex dark:text-black" th:with="menu = ${menuFinder.getPrimary()}">
         <th:block th:each="menuItem,iter : ${menu.menuItems}">
           <li th:if="${#lists.isEmpty(menuItem.children)}" th:attr="id=|${menuItem.metadata.name}|">
             <a th:href="@{${menuItem.status.href}}" th:target="${menuItem.spec.target?.value}" th:text="${menuItem.status.displayName}" class="block px-4 py-1 leading-8"></a>

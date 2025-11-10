@@ -10,10 +10,8 @@
   }
 })();
 
-console.log("📦 [dev-build] 正在构建 main.js...")
+console.log("📦 [dev-build] 正在构建 main.js...");
 
-// 导入主题切换器
-import './lib/themeToggle.js';
-// 导入移动端菜单
-import './lib/mobileMenu.js';
-// 导入最新评论模块
+import "./lib/themeToggle.js";
+import "./lib/mobileMenu.js";
+import "./lib/upvote.js";
