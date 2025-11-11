@@ -5,7 +5,7 @@
        url('../fonts/font.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-  font-display: optional;
+  font-display: swap;
 }
 
 @theme{

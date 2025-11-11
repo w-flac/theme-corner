@@ -1,15 +1,15 @@
 <!doctype html>
-<html th:replace="~{modules/layout :: html(title = ${site.title}, header = 'default', footer = 'default', head = null,content = ~{::content})}" xmlns:th="https://www.thymeleaf.org">
+<html
+  th:replace="~{modules/layout :: html(title = ${site.title}, header = 'default', footer = 'default', head = null,content = ~{::content})}"
+  xmlns:th="https://www.thymeleaf.org"
+>
   <th:block th:fragment="content">
-    <th:block th:if="${theme.config.oIndex.Hero.style == 'newPost'}" th:with="posts=${postFinder.listAll()}">
-      <th:block th:replace="~{modules/heroPost :: heroSection(${posts[0]})}" />
-    </th:block>
-    <th:block th:if="${theme.config.oIndex.Hero.style == 'customPost'}" th:with="post=${postFinder.getByName(theme.config.oIndex.Hero.heroPost)}">
-      <th:block th:replace="~{modules/heroPost :: heroSection(${post})}" />
+    <th:block th:if="${theme.config.oIndex.Hero.Hero_enabled == true}">
+      <th:block th:replace="~{modules/heroPost :: heroPost}" />
     </th:block>
     <th:block th:replace="~{modules/postModule}" />
     <section class="pt-12 pb-12" th:if="${theme.config.oCat.oCat_enabled}">
-      <!--   分类展示   -->
+      <!-- 分类展示 -->
       <div class="space-y-10" th:with="oCat = ${theme.config.oCat.Category}">
         <div class="flex items-center gap-2">
           <svg class="icon size-8 shrink-0" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
@@ -45,7 +45,7 @@
       </div>
     </section>
     <section class="pt-12 pb-12" th:if="${theme.config.oFriends.friends_enabled}">
-      <!--   友链展示   -->
+      <!-- 友链展示 -->
       <div class="space-y-10" th:with="oFriends = ${theme.config.oFriends.Friends}, customFriends = ${theme.config.oFriends.Custom}">
         <div class="flex items-center gap-2">
           <svg class="icon size-8 shrink-0" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
@@ -109,7 +109,7 @@
       </div>
     </section>
     <section class="pt-12 pb-10" th:if="${theme.config.oInfo.info_enabled}">
-      <!--   关于展示   -->
+      <!-- 关于展示 -->
       <div class="flex items-center gap-2" th:with="info = ${theme.config.oInfo.Info}">
         <svg class="icon size-8 shrink-0" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
           <path
@@ -132,7 +132,6 @@
             </div>
             <p class="text-sm leading-8 text-gray-600 dark:text-white/70" th:utext="${infoUser.infoUser_desc}"></p>
           </div>
-
           <ul class="grid grid-cols-2 gap-2 text-gray-600 dark:text-white/70" th:with="stats = ${siteStatsFinder.getStats()}">
             <li class="flex flex-col justify-center gap-1 rounded-2xl border border-dashed border-gray-200/70 px-5 py-4 dark:border-white/15">
               <span class="text-xs tracking-widest text-gray-400 uppercase dark:text-white/40">文章</span>

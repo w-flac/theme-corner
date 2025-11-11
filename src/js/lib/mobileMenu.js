@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     menuPanel.classList.remove("pointer-events-none");
     menuPanel.classList.add("pointer-events-auto");
+    menuPanel.removeAttribute("aria-hidden");
 
     menuPanel.offsetHeight;
 
@@ -42,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       menuPanel.classList.remove("pointer-events-auto");
       menuPanel.classList.add("pointer-events-none");
+      menuPanel.setAttribute("aria-hidden", "true");
     }, 200); // 匹配动画时间
   };
 
