@@ -39,6 +39,7 @@ spec:
               name: style
               id: style
               label: 样式
+              value: newPost
               options:
                 - label: 最新文章
                   value: newPost
