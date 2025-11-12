@@ -10,15 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!menuToggle) return;
 
   const openMenu = () => {
-    // 禁止body滚动
     document.body.classList.add("overflow-hidden");
-
     menuPanel.classList.remove("pointer-events-none");
     menuPanel.classList.add("pointer-events-auto");
     menuPanel.removeAttribute("aria-hidden");
-
     menuPanel.offsetHeight;
-
     menuPanel.classList.remove("opacity-0", "scale-95");
     menuPanel.classList.add("opacity-100", "scale-100");
 
@@ -34,9 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const closeMenu = () => {
-    // 恢复body滚动
     document.body.classList.remove("overflow-hidden");
-
+    iconBar.classList.remove("hidden");
+    iconClose.classList.add("hidden");
     menuPanel.classList.remove("opacity-100", "scale-100");
     menuPanel.classList.add("opacity-0", "scale-95");
 
@@ -51,14 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const isHidden = menuPanel.classList.contains("pointer-events-none");
 
     if (isHidden) {
-      // 打开菜单：立即显示X图标
       iconBar.classList.add("hidden");
       iconClose.classList.remove("hidden");
       openMenu();
     } else {
-      // 关闭菜单：显示菜单图标
-      iconBar.classList.remove("hidden");
-      iconClose.classList.add("hidden");
       closeMenu();
     }
   });

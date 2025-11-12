@@ -9,7 +9,7 @@ spec:
     name: 無.Flac
     website: https://w-flac.org.cn
   description: 在喧嚣的世界里，总要有一隅，容纳文字与思绪的微光。
-  logo: /themes/theme-corner/assets/images/corner.webp
+  logo: /themes/theme-corner/assets/images/logo.png
   homepage: https://www.itheme.net
   repo: https://github.com/w-flac/theme-corner
   issues: https://github.com/w-flac/theme-corner/issues
@@ -17,3 +17,6 @@ spec:
   configMapName: "theme-corner-configMap"
   version: beta1
   requires: ">=2.20.0"
+  license:
+    - name: "GPL-3.0"
+      url: "https://github.com/w-flac/theme-corner/blob/master/LICENSE"
