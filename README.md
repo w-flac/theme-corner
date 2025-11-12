@@ -8,26 +8,26 @@
 </div>
 
 <p align="center">
- <a href="https://halo.run" target="_blank">
-   <img
-     src="https://img.shields.io/badge/dynamic/yaml?label=Halo&query=%24.spec.requires&url=https://raw.githubusercontent.com/w-flac/theme-corner/master/theme.yaml&color=113,195,71"
-     alt="Halo"
-   >
- </a>
+   <a href="https://halo.run" target="_blank">
+    <img
+      src="https://img.shields.io/badge/dynamic/yaml?label=Halo&query=%24.spec.requires&url=https://raw.githubusercontent.com/w-flac/theme-corner/master/theme.yaml&color=113,195,71"
+      alt="Halo"
+    >
+  </a>
 
- <a href="https://github.com/w-flac/theme-corner/releases" target="_blank">
-   <img
-     src="https://img.shields.io/github/v/release/w-flac/theme-corner?include_prereleases"
-     alt="Release"
-   >
- </a>
+  <a href="https://github.com/w-flac/theme-corner/releases" target="_blank">
+    <img
+      src="https://img.shields.io/github/v/release/w-flac/theme-corner?include_prereleases"
+      alt="Release"
+    >
+  </a>
 
- <a href="https://github.com/w-flac/theme-corner/blob/main/LICENSE" target="_blank">
-   <img
-     src="https://img.shields.io/github/license/w-flac/theme-corner"
-     alt="MIT License"
-   >
- </a>
+  <a href="https://github.com/w-flac/theme-corner/blob/master/LICENSE" target="_blank">
+    <img
+      src="https://img.shields.io/github/license/w-flac/theme-corner"
+      alt="GPL-3 License"
+    >
+  </a>
 </p>
 
 ---
