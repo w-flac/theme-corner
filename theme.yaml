@@ -1,8 +1,9 @@
-# 6nonk8s
 apiVersion: theme.halo.run/v1alpha1
 kind: Theme
 metadata:
   name: theme-corner
+  annotations:
+    "store.halo.run/app-id": "app-2gdimmei"
 spec:
   displayName: 一隅
   author:
