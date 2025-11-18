@@ -10,7 +10,7 @@
     <p class="text-xs text-gray-500 md:text-sm dark:text-white/60" th:text="${indexBlog.blogDesc ?: '请在主题设置中添加概要'}"></p>
   </div>
   <ul
-    class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3"
+    class="mt-10 grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
     th:with="postLimit=${theme.config.oIndex.Blog.blogStyle ?: 5}, posts=${postFinder.list({page: 1, size: postLimit, sort: {'spec.publishTime,desc'}})}"
   >
     <li
@@ -44,7 +44,7 @@
         <a th:href="@{${post.status.permalink}}">
           <h4 class="text-xl font-normal text-gray-900 dark:text-white" th:text="${post.spec.title}"></h4>
         </a>
-        <p class="-mt-2 line-clamp-3 overflow-hidden text-base leading-relaxed text-gray-600 sm:mt-0 dark:text-white/70" th:text="${post.status.excerpt}"></p>
+        <p class="-mt-2 line-clamp-3 overflow-hidden text-sm md:text-base leading-relaxed text-gray-600 sm:mt-0 dark:text-white/70" th:text="${post.status.excerpt}"></p>
         <div class="mt-auto flex items-center justify-between">
           <a class="inline-flex items-center gap-1 text-xs font-medium text-gray-900 dark:text-white" th:href="@{${post.status.permalink}}">阅读全文</a>
           <ul class="flex items-center gap-2 text-xs text-gray-500 dark:text-white/50">

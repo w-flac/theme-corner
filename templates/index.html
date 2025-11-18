@@ -8,9 +8,8 @@
       <th:block th:replace="~{modules/heroPost :: heroPost}" />
     </th:block>
     <th:block th:replace="~{modules/postModule}" />
-    <section class="pt-12 pb-12" th:if="${theme.config.oCat.oCat_enabled}">
+    <section class="pt-12 pb-12 space-y-10" th:if="${theme.config.oCat.oCat_enabled}" th:with="oCat = ${theme.config.oCat.Category}" id="oIndex_cat">
       <!-- 分类展示 -->
-      <div class="space-y-10" th:with="oCat = ${theme.config.oCat.Category}">
         <div class="flex items-center gap-2">
           <svg class="icon size-8 shrink-0" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
             <path
@@ -21,7 +20,7 @@
           <span class="h-10 w-px bg-gray-300 md:h-6 dark:bg-white/40"></span>
           <p class="text-xs text-gray-500 md:text-sm dark:text-white/60">[[${oCat.categoryDesc}]]</p>
         </div>
-        <ul class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3" th:if="${not #lists.isEmpty(oCat.categoryList)}">
+        <ul class="mt-10 grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3" th:if="${not #lists.isEmpty(oCat.categoryList)}">
           <li class="rounded-2xl border border-gray-200/60 bg-white/60 p-4 dark:border-white/10 dark:bg-white/5" th:each="item : ${oCat.categoryList}">
             <h3 class="text-sm font-medium text-gray-700 dark:text-white/80" th:text="${item.categoryItem_title}"></h3>
             <p class="mt-1 line-clamp-2 overflow-hidden text-sm leading-6 text-gray-500 dark:text-white/60" th:text="${item.categoryItem_desc}"></p>
@@ -42,11 +41,9 @@
             </div>
           </li>
         </ul>
-      </div>
     </section>
-    <section class="pt-12 pb-12" th:if="${theme.config.oFriends.friends_enabled}">
+    <section class="pt-12 pb-12 space-y-10" id="oIndex_friends" th:if="${theme.config.oFriends.friends_enabled}" th:with="oFriends = ${theme.config.oFriends.Friends}, customFriends = ${theme.config.oFriends.Custom}">
       <!-- 友链展示 -->
-      <div class="space-y-10" th:with="oFriends = ${theme.config.oFriends.Friends}, customFriends = ${theme.config.oFriends.Custom}">
         <div class="flex items-center gap-2">
           <svg class="icon size-8 shrink-0" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
             <path
@@ -57,7 +54,7 @@
           <span class="h-10 w-px bg-gray-300 md:h-6 dark:bg-white/40"></span>
           <p class="text-xs text-gray-500 md:text-sm dark:text-white/60">[[${oFriends.friendsDesc}]]</p>
         </div>
-        <ul class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <ul class="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
           <li
             class="flex gap-4 rounded-2xl border border-gray-200/60 bg-white/60 p-4 dark:border-white/10 dark:bg-white/5"
             th:if="${oFriends.friendsStyle == 'links'}"
@@ -106,9 +103,8 @@
             </div>
           </li>
         </ul>
-      </div>
     </section>
-    <section class="pt-12 pb-10" th:if="${theme.config.oInfo.info_enabled}">
+    <section class="pt-12 pb-10" id="oIndex_info" th:if="${theme.config.oInfo.info_enabled}">
       <!-- 关于展示 -->
       <div class="flex items-center gap-2" th:with="info = ${theme.config.oInfo.Info}">
         <svg class="icon size-8 shrink-0" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
