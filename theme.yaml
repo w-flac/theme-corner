@@ -16,7 +16,7 @@ spec:
   issues: https://github.com/w-flac/theme-corner/issues
   settingName: "theme-corner-setting"
   configMapName: "theme-corner-configMap"
-  version: 0.2.0
+  version: 0.2.1
   requires: ">=2.20.0"
   license:
     - name: "GPL-3.0"
