@@ -85,6 +85,7 @@ spec:
               key: customTag
               label: 标签
               help: 请填写标签
+              if: $get(style).value === 'customPost'
             - $formkit: text
               name: customTitle
               id: customTitle
@@ -246,15 +247,25 @@ spec:
                     value: links
                   - label: 自定义
                     value: custom
-              - $formkit: text
-                name: links
-                id: links
-                key: links
-                label: 标识
-                help: 请在链接插件页面中复制唯一标识，例如：link-group-xxxx
-                value: ""
-                validation: required
+              - $formkit: select
+                name: linkName
+                id: linkName
+                key: linkName
+                label: 选择分组
                 if: "$get(friendsStyle).value === 'links'"
+                help: 此选项需要链接插件支持
+                clearable: true
+                action: /apis/core.halo.run/v1alpha1/linkgroups
+                validation: required
+                requestOption:
+                  method: GET
+                  pageField: page
+                  sizeField: size
+                  totalField: total
+                  itemsField: items
+                  labelField: spec.displayName
+                  valueField: metadata.name
+                  validation: required
           - $formkit: group
             label: 自定义选项
             name: Custom

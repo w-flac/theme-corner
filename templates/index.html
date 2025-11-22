@@ -8,101 +8,109 @@
       <th:block th:replace="~{modules/heroPost :: heroPost}" />
     </th:block>
     <th:block th:replace="~{modules/postModule}" />
-    <section class="pt-12 pb-12 space-y-10" th:if="${theme.config.oCat.oCat_enabled}" th:with="oCat = ${theme.config.oCat.Category}" id="oIndex_cat">
+    <section class="space-y-10 pt-12 pb-12" th:if="${theme.config.oCat.oCat_enabled}" th:with="oCat = ${theme.config.oCat.Category}" id="oIndex_cat">
       <!-- 分类展示 -->
-        <div class="flex items-center gap-2">
-          <svg class="icon size-8 shrink-0" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-            <path
-              d="M885.333333 96c23.786667 0 39.253333 25.034667 28.618667 46.314667a7024.8 7024.8 0 0 0-56.917333 116.234666A424.853333 424.853333 0 0 1 938.666667 509.589333c0 235.637333-191.029333 426.666667-426.666667 426.666667s-426.666667-191.029333-426.666667-426.666667c0-235.648 191.029333-426.666667 426.666667-426.666666a424.938667 424.938667 0 0 1 196.544 47.872C762.453333 107.573333 821.482667 96 885.333333 96z m-164.234666 99.381333a32 32 0 0 1-29.696-1.066666A360.821333 360.821333 0 0 0 512 146.933333c-200.298667 0-362.666667 162.368-362.666667 362.666667 0 200.288 162.368 362.666667 362.666667 362.666667s362.666667-162.378667 362.666667-362.666667a360.96 360.96 0 0 0-79.850667-227.061333 32 32 0 0 1-4-33.706667 5870.922667 5870.922667 0 0 1 41.322667-85.589333c-39.786667 4.970667-76.768 15.701333-111.04 32.149333zM330.666667 362.666667a42.666667 42.666667 0 0 1 42.666666 42.666666v64a42.666667 42.666667 0 1 1-85.333333 0v-64a42.666667 42.666667 0 0 1 42.666667-42.666666z m170.666666 0a42.666667 42.666667 0 0 1 42.666667 42.666666v64a42.666667 42.666667 0 1 1-85.333333 0v-64a42.666667 42.666667 0 0 1 42.666666-42.666666z"
-            ></path>
-          </svg>
-          <h3 class="shrink-0 text-2xl font-medium text-gray-800 dark:text-white/90">[[${oCat.categoryTitle}]]</h3>
-          <span class="h-10 w-px bg-gray-300 md:h-6 dark:bg-white/40"></span>
-          <p class="text-xs text-gray-500 md:text-sm dark:text-white/60">[[${oCat.categoryDesc}]]</p>
-        </div>
-        <ul class="mt-10 grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3" th:if="${not #lists.isEmpty(oCat.categoryList)}">
-          <li class="rounded-2xl border border-gray-200/60 bg-white/60 p-4 dark:border-white/10 dark:bg-white/5" th:each="item : ${oCat.categoryList}">
-            <h3 class="text-sm font-medium text-gray-700 dark:text-white/80" th:text="${item.categoryItem_title}"></h3>
-            <p class="mt-1 line-clamp-2 overflow-hidden text-sm leading-6 text-gray-500 dark:text-white/60" th:text="${item.categoryItem_desc}"></p>
-            <div class="mt-3 flex flex-wrap gap-2 text-xs text-gray-500 dark:text-white/50">
-              <a
-                class="rounded-full border border-dashed border-gray-200/70 px-2 py-1 dark:border-white/10"
-                th:each="categorySlug : ${item.categoryItem_list}"
-                th:with="categoryObj=${@categoryFinder?.getByName(categorySlug)}"
-                th:text="${categoryObj.spec.displayName}"
-                th:href="@{${categoryObj.status.permalink}}"
-              ></a>
-              <span
-                class="rounded-full border border-dashed border-gray-200/70 px-2 py-1 text-gray-400 dark:border-white/10 dark:text-white/30"
-                th:if="${#lists.isEmpty(item.categoryItem_list)}"
-              >
-                暂无分类
-              </span>
-            </div>
-          </li>
-        </ul>
+      <div class="flex items-center gap-2">
+        <svg class="icon size-8 shrink-0" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+          <path
+            d="M885.333333 96c23.786667 0 39.253333 25.034667 28.618667 46.314667a7024.8 7024.8 0 0 0-56.917333 116.234666A424.853333 424.853333 0 0 1 938.666667 509.589333c0 235.637333-191.029333 426.666667-426.666667 426.666667s-426.666667-191.029333-426.666667-426.666667c0-235.648 191.029333-426.666667 426.666667-426.666666a424.938667 424.938667 0 0 1 196.544 47.872C762.453333 107.573333 821.482667 96 885.333333 96z m-164.234666 99.381333a32 32 0 0 1-29.696-1.066666A360.821333 360.821333 0 0 0 512 146.933333c-200.298667 0-362.666667 162.368-362.666667 362.666667 0 200.288 162.368 362.666667 362.666667 362.666667s362.666667-162.378667 362.666667-362.666667a360.96 360.96 0 0 0-79.850667-227.061333 32 32 0 0 1-4-33.706667 5870.922667 5870.922667 0 0 1 41.322667-85.589333c-39.786667 4.970667-76.768 15.701333-111.04 32.149333zM330.666667 362.666667a42.666667 42.666667 0 0 1 42.666666 42.666666v64a42.666667 42.666667 0 1 1-85.333333 0v-64a42.666667 42.666667 0 0 1 42.666667-42.666666z m170.666666 0a42.666667 42.666667 0 0 1 42.666667 42.666666v64a42.666667 42.666667 0 1 1-85.333333 0v-64a42.666667 42.666667 0 0 1 42.666666-42.666666z"
+          ></path>
+        </svg>
+        <h3 class="shrink-0 text-2xl font-medium text-gray-800 dark:text-white/90">[[${oCat.categoryTitle}]]</h3>
+        <span class="h-10 w-px bg-gray-300 md:h-6 dark:bg-white/40"></span>
+        <p class="text-xs text-gray-500 md:text-sm dark:text-white/60">[[${oCat.categoryDesc}]]</p>
+      </div>
+      <ul class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3" th:if="${not #lists.isEmpty(oCat.categoryList)}">
+        <li class="rounded-2xl border border-gray-200/60 bg-white/60 p-4 dark:border-white/10 dark:bg-white/5" th:each="item : ${oCat.categoryList}">
+          <h3 class="text-sm font-medium text-gray-700 dark:text-white/80" th:text="${item.categoryItem_title}"></h3>
+          <p class="mt-1 line-clamp-2 overflow-hidden text-sm leading-6 text-gray-500 dark:text-white/60" th:text="${item.categoryItem_desc}"></p>
+          <div class="mt-3 flex flex-wrap gap-2 text-xs text-gray-500 dark:text-white/50">
+            <a
+              class="rounded-full border border-dashed border-gray-200/70 px-2 py-1 dark:border-white/10"
+              th:each="categorySlug : ${item.categoryItem_list}"
+              th:with="categoryObj=${@categoryFinder?.getByName(categorySlug)}"
+              th:text="${categoryObj.spec.displayName}"
+              th:href="@{${categoryObj.status.permalink}}"
+            ></a>
+            <span
+              class="rounded-full border border-dashed border-gray-200/70 px-2 py-1 text-gray-400 dark:border-white/10 dark:text-white/30"
+              th:if="${#lists.isEmpty(item.categoryItem_list)}"
+            >
+              暂无分类
+            </span>
+          </div>
+        </li>
+      </ul>
     </section>
-    <section class="pt-12 pb-12 space-y-10" id="oIndex_friends" th:if="${theme.config.oFriends.friends_enabled}" th:with="oFriends = ${theme.config.oFriends.Friends}, customFriends = ${theme.config.oFriends.Custom}">
+    <section
+      class="space-y-10 pt-12 pb-12"
+      id="oIndex_friends"
+      th:if="${theme.config.oFriends.friends_enabled}"
+      th:with="oFriends = ${theme.config.oFriends.Friends}, customFriends = ${theme.config.oFriends.Custom}"
+    >
       <!-- 友链展示 -->
-        <div class="flex items-center gap-2">
-          <svg class="icon size-8 shrink-0" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-            <path
-              d="M885.333333 96c23.786667 0 39.253333 25.034667 28.618667 46.314667a7024.8 7024.8 0 0 0-56.917333 116.234666A424.853333 424.853333 0 0 1 938.666667 509.589333c0 235.637333-191.029333 426.666667-426.666667 426.666667s-426.666667-191.029333-426.666667-426.666667c0-235.648 191.029333-426.666667 426.666667-426.666666a424.938667 424.938667 0 0 1 196.544 47.872C762.453333 107.573333 821.482667 96 885.333333 96z m-164.234666 99.381333a32 32 0 0 1-29.696-1.066666A360.821333 360.821333 0 0 0 512 146.933333c-200.298667 0-362.666667 162.368-362.666667 362.666667 0 200.288 162.368 362.666667 362.666667 362.666667s362.666667-162.378667 362.666667-362.666667a360.96 360.96 0 0 0-79.850667-227.061333 32 32 0 0 1-4-33.706667 5870.922667 5870.922667 0 0 1 41.322667-85.589333c-39.786667 4.970667-76.768 15.701333-111.04 32.149333zM330.666667 362.666667a42.666667 42.666667 0 0 1 42.666666 42.666666v64a42.666667 42.666667 0 1 1-85.333333 0v-64a42.666667 42.666667 0 0 1 42.666667-42.666666z m170.666666 0a42.666667 42.666667 0 0 1 42.666667 42.666666v64a42.666667 42.666667 0 1 1-85.333333 0v-64a42.666667 42.666667 0 0 1 42.666666-42.666666z"
-            ></path>
-          </svg>
-          <h3 class="shrink-0 text-2xl font-medium text-gray-800 dark:text-white/90">[[${oFriends.friendsTitle}]]</h3>
-          <span class="h-10 w-px bg-gray-300 md:h-6 dark:bg-white/40"></span>
-          <p class="text-xs text-gray-500 md:text-sm dark:text-white/60">[[${oFriends.friendsDesc}]]</p>
-        </div>
-        <ul class="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-          <li
-            class="flex gap-4 rounded-2xl border border-gray-200/60 bg-white/60 p-4 dark:border-white/10 dark:bg-white/5"
-            th:if="${oFriends.friendsStyle == 'links'}"
-            th:each="link : ${linkFinder.listBy(oFriends.links)}"
-          >
-            <div class="h-16 w-16 shrink-0 overflow-hidden rounded-full border border-gray-200/60 dark:border-white/10">
-              <img class="h-full w-full object-cover" th:src="${link.spec.logo}" th:alt="${link.spec.displayName}" />
-            </div>
-            <div class="flex flex-1 flex-col justify-between text-xs text-gray-500 dark:text-white/60">
-              <div>
-                <div class="flex items-center justify-between text-sm text-gray-800 dark:text-white">
-                  <span class="font-medium" th:text="${link.spec.displayName}"></span>
-                  <span class="rounded-full border border-gray-200/60 px-2 py-1 text-xs text-gray-400 dark:border-white/10 dark:text-white/40">独立站点</span>
+      <div class="flex items-center gap-2">
+        <svg class="icon size-8 shrink-0" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+          <path
+            d="M885.333333 96c23.786667 0 39.253333 25.034667 28.618667 46.314667a7024.8 7024.8 0 0 0-56.917333 116.234666A424.853333 424.853333 0 0 1 938.666667 509.589333c0 235.637333-191.029333 426.666667-426.666667 426.666667s-426.666667-191.029333-426.666667-426.666667c0-235.648 191.029333-426.666667 426.666667-426.666666a424.938667 424.938667 0 0 1 196.544 47.872C762.453333 107.573333 821.482667 96 885.333333 96z m-164.234666 99.381333a32 32 0 0 1-29.696-1.066666A360.821333 360.821333 0 0 0 512 146.933333c-200.298667 0-362.666667 162.368-362.666667 362.666667 0 200.288 162.368 362.666667 362.666667 362.666667s362.666667-162.378667 362.666667-362.666667a360.96 360.96 0 0 0-79.850667-227.061333 32 32 0 0 1-4-33.706667 5870.922667 5870.922667 0 0 1 41.322667-85.589333c-39.786667 4.970667-76.768 15.701333-111.04 32.149333zM330.666667 362.666667a42.666667 42.666667 0 0 1 42.666666 42.666666v64a42.666667 42.666667 0 1 1-85.333333 0v-64a42.666667 42.666667 0 0 1 42.666667-42.666666z m170.666666 0a42.666667 42.666667 0 0 1 42.666667 42.666666v64a42.666667 42.666667 0 1 1-85.333333 0v-64a42.666667 42.666667 0 0 1 42.666666-42.666666z"
+          ></path>
+        </svg>
+        <h3 class="shrink-0 text-2xl font-medium text-gray-800 dark:text-white/90">[[${oFriends.friendsTitle}]]</h3>
+        <span class="h-10 w-px bg-gray-300 md:h-6 dark:bg-white/40"></span>
+        <p class="text-xs text-gray-500 md:text-sm dark:text-white/60">[[${oFriends.friendsDesc}]]</p>
+      </div>
+      <ul class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <th:block th:if="${oFriends.friendsStyle == 'links'}" th:with="linkName = ${oFriends.linkName}">
+          <th:block th:each="group : ${linkFinder.groupBy()}" th:if="${group.metadata.name == linkName}">
+            <li
+              class="flex group gap-4 rounded-2xl border border-gray-200/60 bg-white/60 p-4 dark:border-white/10 dark:bg-white/5"
+              th:each="link : ${linkFinder.listBy(linkName)}"
+            >
+              <div class="h-16 w-16 shrink-0 overflow-hidden rounded-full border border-gray-200/60 dark:border-white/10">
+                <img class="h-full w-full object-cover" th:src="${link.spec.logo}" th:alt="${link.spec.displayName}" />
+              </div>
+              <div class="flex flex-1 flex-col justify-between text-xs text-gray-500 dark:text-white/60">
+                <div>
+                  <div class="flex items-center justify-between text-sm text-gray-800 dark:text-white">
+                    <span class="font-medium" th:text="${link.spec.displayName}"></span>
+                    <span class="rounded-full border border-gray-200/60 px-2 py-1 text-xs text-gray-400 dark:border-white/10 dark:text-white/40" th:text="${group.spec.displayName}"></span>
+                  </div>
+                  <p class="mt-2 line-clamp-1 leading-6" th:text="${link.spec.description}"></p>
                 </div>
-                <p class="mt-2 line-clamp-1 leading-6" th:text="${link.spec.description}"></p>
-              </div>
-              <div class="mt-3 flex items-center justify-between">
-                <a class="text-xs" th:href="${link.spec.url}" th:text="${link.spec.url}" target="_blank" rel="noreferrer"></a>
-                <span class="text-xs text-gray-400 dark:text-white/40" th:text="${#temporals.format(link.metadata.creationTimestamp,'yyyy年MM月')}"></span>
-              </div>
-            </div>
-          </li>
-          <li
-            class="flex gap-4 rounded-2xl border border-gray-200/60 bg-white/60 p-4 dark:border-white/10 dark:bg-white/5"
-            th:if="${oFriends.friendsStyle == 'custom'}"
-            th:each="item : ${customFriends.customLinks}"
-          >
-            <div class="h-16 w-16 shrink-0 overflow-hidden rounded-full border border-gray-200/60 dark:border-white/10">
-              <img class="h-full w-full object-cover" th:src="${item.customLink_icon}" th:alt="${item.customLink_title}" />
-            </div>
-            <div class="flex flex-1 flex-col justify-between text-xs text-gray-500 dark:text-white/60">
-              <div>
-                <div class="flex items-center justify-between text-sm text-gray-800 dark:text-white">
-                  <span class="font-medium" th:text="${item.customLink_title}"></span>
-                  <span
-                    class="rounded-full border border-gray-200/60 px-2 py-1 text-xs text-gray-400 dark:border-white/10 dark:text-white/40"
-                    th:text="${item.customLink_tag}"
-                  ></span>
+                <div class="mt-3 flex items-center justify-between">
+                    <a class="text-xs text-gray-500 dark:text-white/60 transition-colors duration-300 group-hover:text-black dark:group-hover:text-white" th:href="${link.spec.url}" th:text="${#strings.replace(#strings.replace(link.spec.url, 'https://', ''), 'http://', '')}" target="_blank" rel="noreferrer"></a>
+                  <span class="text-xs text-gray-400 dark:text-white/40" th:text="${#temporals.format(link.metadata.creationTimestamp,'yyyy年MM月')}"></span>
                 </div>
-                <p class="mt-2 line-clamp-1 leading-6" th:text="${item.customLink_desc}"></p>
               </div>
-              <div class="mt-3 flex items-center justify-between">
-                <a class="text-xs" th:href="${item.customLink_url}" th:text="${item.customLink_url}" target="_blank" rel="noreferrer"></a>
-                <span class="text-xs text-gray-400 dark:text-white/40" th:text="${item.customLink_time}"></span>
+            </li>
+          </th:block>
+        </th:block>
+        <li
+          class="flex gap-4 rounded-2xl border border-gray-200/60 bg-white/60 p-4 dark:border-white/10 dark:bg-white/5"
+          th:if="${oFriends.friendsStyle == 'custom'}"
+          th:each="item : ${customFriends.customLinks}"
+        >
+          <div class="h-16 w-16 shrink-0 overflow-hidden rounded-full border border-gray-200/60 dark:border-white/10">
+            <img class="h-full w-full object-cover" th:src="${item.customLink_icon}" th:alt="${item.customLink_title}" />
+          </div>
+          <div class="flex flex-1 flex-col justify-between text-xs text-gray-500 dark:text-white/60">
+            <div>
+              <div class="flex items-center justify-between text-sm text-gray-800 dark:text-white">
+                <span class="font-medium" th:text="${item.customLink_title}"></span>
+                <span
+                  class="rounded-full border border-gray-200/60 px-2 py-1 text-xs text-gray-400 dark:border-white/10 dark:text-white/40"
+                  th:text="${item.customLink_tag}"
+                ></span>
               </div>
+              <p class="mt-2 line-clamp-1 leading-6" th:text="${item.customLink_desc}"></p>
             </div>
-          </li>
-        </ul>
+            <div class="mt-3 flex items-center justify-between">
+              <a class="text-xs" th:href="${item.customLink_url}" th:text="${item.customLink_url}" target="_blank" rel="noreferrer"></a>
+              <span class="text-xs text-gray-400 dark:text-white/40" th:text="${item.customLink_time}"></span>
+            </div>
+          </div>
+        </li>
+      </ul>
     </section>
     <section class="pt-12 pb-10" id="oIndex_info" th:if="${theme.config.oInfo.info_enabled}">
       <!-- 关于展示 -->
