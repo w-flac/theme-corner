@@ -100,14 +100,8 @@ export default defineConfig(({ command }) => {
       terserOptions: {
         compress: {
           drop_console: true, // 删除 console.log
-          passes: 2, // 多次压缩以获得更好的效果
         },
-        mangle: {
-          toplevel: true, // 混淆顶级作用域的变量名
-          properties: {
-            regex: /^_/, // 只混淆以下划线开头的属性（可选）
-          },
-        },
+        mangle: false, // 不混淆变量名
         format: {
           comments: false, // 删除注释
           beautify: false, // 输出一行

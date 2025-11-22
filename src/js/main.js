@@ -18,7 +18,8 @@ import "./lib/shareModal.js";
 import "./lib/upvote.js";
 import "./lib/heroSwiper.js";
 
-function toggleMenu(button) {
+// 将 toggleMenu 直接定义在 window 对象上，确保 HTML 中的 onclick 可以访问
+window.toggleMenu = function toggleMenu(button) {
   const menu = document.getElementById("children-" + button.id);
   if (!menu) return;
 
@@ -46,4 +47,4 @@ function toggleMenu(button) {
     menu.classList.remove("pointer-events-auto", "opacity-100", "translate-y-0");
     menu.setAttribute("aria-hidden", "true");
   }
-}
+};
