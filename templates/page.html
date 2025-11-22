@@ -80,19 +80,29 @@
               <span>喜欢</span>
             </button>
             <!-- 分享 -->
-            <button
-              id="share-btn-page"
-              class="share-btn flex items-center gap-1 text-sm text-gray-500 dark:text-white/60 min-w-0 flex-shrink-0"
-              aria-label="Share page"
-            >
-              <svg t="1762886943337" class="icon h-3.5 w-3.5 md:h-4.5 md:w-4.5" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3348" width="200" height="200">
-                <path d="M878.08 731.274667a32 32 0 0 1-54.88-32.938667A360.789333 360.789333 0 0 0 874.666667 512c0-200.298667-162.368-362.666667-362.666667-362.666667S149.333333 311.701333 149.333333 512s162.368 362.666667 362.666667 362.666667a360.789333 360.789333 0 0 0 186.314667-51.445334 32 32 0 0 1 32.928 54.88A424.778667 424.778667 0 0 1 512 938.666667C276.362667 938.666667 85.333333 747.637333 85.333333 512S276.362667 85.333333 512 85.333333s426.666667 191.029333 426.666667 426.666667c0 78.293333-21.152 153.568-60.586667 219.274667zM374.581333 489.450667l84.341334 83.989333 190.432-190.72a32 32 0 0 1 45.290666 45.226667l-213.013333 213.333333a32 32 0 0 1-45.226667 0.064l-106.986666-106.549333a32 32 0 1 1 45.162666-45.344z" fill="currentColor" p-id="3349"></path>
+            <button id="share-btn-page" class="share-btn flex min-w-0 shrink-0 items-center gap-1 text-sm text-gray-500 dark:text-white/60" aria-label="Share page">
+              <svg
+                t="1762886943337"
+                class="icon h-3.5 w-3.5 md:h-4.5 md:w-4.5"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="3348"
+                width="200"
+                height="200"
+              >
+                <path
+                  d="M878.08 731.274667a32 32 0 0 1-54.88-32.938667A360.789333 360.789333 0 0 0 874.666667 512c0-200.298667-162.368-362.666667-362.666667-362.666667S149.333333 311.701333 149.333333 512s162.368 362.666667 362.666667 362.666667a360.789333 360.789333 0 0 0 186.314667-51.445334 32 32 0 0 1 32.928 54.88A424.778667 424.778667 0 0 1 512 938.666667C276.362667 938.666667 85.333333 747.637333 85.333333 512S276.362667 85.333333 512 85.333333s426.666667 191.029333 426.666667 426.666667c0 78.293333-21.152 153.568-60.586667 219.274667zM374.581333 489.450667l84.341334 83.989333 190.432-190.72a32 32 0 0 1 45.290666 45.226667l-213.013333 213.333333a32 32 0 0 1-45.226667 0.064l-106.986666-106.549333a32 32 0 1 1 45.162666-45.344z"
+                  fill="currentColor"
+                  p-id="3349"
+                ></path>
               </svg>
               <span>分享</span>
             </button>
           </div>
           <!-- 评论数 -->
-          <button  th:if="${haloCommentEnabled}"
+          <button
+            th:if="${haloCommentEnabled}"
             onclick="document.getElementById('page-comment-section').classList.toggle('hidden')"
             class="flex cursor-pointer items-center gap-1 text-sm text-gray-500 transition-colors hover:text-gray-700 dark:text-white/60 dark:hover:text-white/80"
             aria-label="Toggle comments"
