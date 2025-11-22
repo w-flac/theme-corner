@@ -154,6 +154,23 @@ spec:
                   value: 5
                 - label: 8
                   value: 8
+            - $formkit: group
+              label: 查看更多
+              name: more
+              if: $get(blog_enabled).value
+              children:
+                - $formkit: text
+                  name: moreTitle
+                  id: moreTitle
+                  key: moreTitle
+                  label: 标题
+                  value: '探索更多精彩内容，发现更多故事'
+                - $formkit: text
+                  name: moreLink
+                  id: moreLink
+                  key: moreLink
+                  label: 提示
+                  value: '查看更多'
     #分类模块
     - group: oCat
       label: 分类模块
@@ -494,4 +511,3 @@ spec:
               id: gongan
               key: gongan
               label: 公安备案
-
