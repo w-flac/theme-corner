@@ -525,8 +525,8 @@ spec:
               key: oGeneralAgree
               label: 我已知晓注意事项
         - $formkit: group
-          label: 归档页面 / archives
-          name: oGeneralSetting
+          label: 归档 / archives
+          name: archivesSetting
           if: $get(oGeneralAgree).value
           children:
             - $formkit: checkbox

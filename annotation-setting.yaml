@@ -10,3 +10,18 @@ spec:
     - $formkit: "text"
       name: "desc"
       label: "简介"
+
+---
+
+apiVersion: v1alpha1
+kind: AnnotationSetting
+metadata:
+  generateName: annotation-setting-
+spec:
+  targetRef:
+    group: core.halo.run
+    kind: LinkGroup
+  formSchema:
+    - $formkit: "text"
+      name: "lGroupDesc"
+      label: "简介"
