@@ -57,7 +57,7 @@ spec:
               options:
                 - label: 选择文章
                   value: selectPost
-                - label: 自定义
+                - label: 自定义轮播
                   value: customPost
             #文章选择
             - $formkit: postSelect
@@ -69,55 +69,63 @@ spec:
               if: $get(style).value === 'selectPost'
               value: ''
             #自定义
-            - $formkit: attachment
-              accepts:
-                - 'image/*'
-              name: customImg
-              id: customImg
-              key: customImg
-              label: 图片
-              help: 请选择图片
-              value: ''
+            - $formkit: repeater
+              name: customHero
+              id: customHero
+              key: customHero
+              label: 大屏展示图
               if: $get(style).value === 'customPost'
-            - $formkit: text
-              name: customTag
-              id: customTag
-              key: customTag
-              label: 标签
-              help: 请填写标签
-              if: $get(style).value === 'customPost'
-            - $formkit: text
-              name: customTitle
-              id: customTitle
-              key: customTitle
-              label: 标题
-              help: 请填写标题
-              value: ""
-              if: $get(style).value === 'customPost'
-            - $formkit: text
-              name: customDesc
-              id: customDesc
-              key: customDesc
-              label: 描述
-              help: 请填写描述
-              value: ""
-              if: $get(style).value === 'customPost'
-            - $formkit: text
-              name: customBtn
-              id: customBtn
-              key: customBtn
-              label: 按钮
-              help: 请填写按钮名称
-              value: ""
-              if: $get(style).value === 'customPost'
-            - $formkit: text
-              name: customLink
-              id: customLink
-              key: customLink
-              label: 链接
-              help: 请填写链接
-              value: ""
-              if: $get(style).value === 'customPost'
+              value: []
+              children:
+                - $formkit: attachment
+                  accepts:
+                    - 'image/*'
+                  name: customImg
+                  id: customImg
+                  key: customImg
+                  label: 图片
+                  help: 请选择图片
+                  value: ''
+                  if: $get(style).value === 'customPost'
+                - $formkit: text
+                  name: customTag
+                  id: customTag
+                  key: customTag
+                  label: 标签
+                  help: 请填写标签
+                  if: $get(style).value === 'customPost'
+                - $formkit: text
+                  name: customTitle
+                  id: customTitle
+                  key: customTitle
+                  label: 标题
+                  help: 请填写标题
+                  value: ""
+                  if: $get(style).value === 'customPost'
+                - $formkit: text
+                  name: customDesc
+                  id: customDesc
+                  key: customDesc
+                  label: 描述
+                  help: 请填写描述
+                  value: ""
+                  if: $get(style).value === 'customPost'
+                - $formkit: text
+                  name: customBtn
+                  id: customBtn
+                  key: customBtn
+                  label: 按钮
+                  help: 请填写按钮名称
+                  value: ""
+                  if: $get(style).value === 'customPost'
+                - $formkit: text
+                  name: customLink
+                  id: customLink
+                  key: customLink
+                  label: 链接
+                  help: 请填写链接
+                  value: ""
+                  if: $get(style).value === 'customPost'
         #最新文章
         - $formkit: group
           label: 文章显示

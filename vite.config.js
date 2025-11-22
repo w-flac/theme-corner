@@ -98,8 +98,10 @@ export default defineConfig(({ command }) => {
       emptyOutDir: false,
       minify: isBuild ? "terser" : false, // 构建模式使用 terser
       terserOptions: {
-        compress: false, // 不压缩
-        mangle: false, // 不混淆变量名
+        compress: {
+          drop_console: true, // 删除 console.log
+        },
+        mangle: true, // 不混淆变量名
         format: {
           comments: false, // 删除注释
           beautify: false, // 输出一行

@@ -56,3 +56,14 @@
 .post-tag :where(code) {
     @apply wrap-break-word break-all;
 }
+.swiper-pagination-bullet {
+    width: 25px;
+    height: 5px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+.swiper-pagination-bullet-active {
+    width: 35px;
+    @apply bg-gray-300/60 dark:bg-white/30 ;
+}

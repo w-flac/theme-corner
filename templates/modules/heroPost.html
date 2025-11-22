@@ -63,44 +63,50 @@
 
     <th:block th:if="${hero.style == 'customPost'}">
       <!-- 自定义模式 -->
-      <section class="pt-28 md:pt-36" id="custom-hero">
-        <div
-          class="flex flex-col gap-4 rounded-3xl bg-gray-400/10 p-4 transition-colors duration-300 md:flex-row md:items-center md:gap-6 md:p-6 lg:gap-14 lg:p-14 dark:bg-white/5"
-        >
-          <div class="w-full shrink-0 md:w-1/2">
-            <img
-              th:if="${not #strings.isEmpty(hero.customImg)}"
-              th:src="${hero.customImg}"
-              th:alt="${hero.customTitle}"
-              class="h-60 w-full rounded-2xl object-cover md:h-72 xl:h-90"
-            />
-            <img class="h-60 w-full rounded-2xl object-cover md:h-72 xl:h-90" th:src="${#theme.assets('/images/blog.avif')}" th:if="${#strings.isEmpty(hero.customImg)}" />
-          </div>
-
-          <div class="flex w-full flex-col justify-center gap-3 p-2 md:w-1/2 md:gap-4 md:p-0 lg:gap-6">
-            <div class="flex items-center gap-2" th:if="${not #strings.isEmpty(hero.customTag)}">
-              <span class="hidden h-px w-3 bg-gray-400 md:block dark:bg-white/20"></span>
-              <p class="text-xs font-semibold tracking-[0.15em] text-gray-500 uppercase dark:text-white/50" th:text="${hero.customTag}"></p>
+      <section class="swiper custom-hero pt-28! md:pt-36!" id="custom-hero">
+        <ul class="swiper-wrapper">
+          <li th:each="banner : ${hero.customHero}" class="swiper-slide">
+            <div
+              class="flex flex-col gap-4 rounded-3xl bg-gray-400/10 p-4 transition-colors duration-300 md:flex-row md:items-center md:gap-6 md:p-6 lg:gap-14 lg:p-14 dark:bg-white/5"
+            >
+              <div class="w-full shrink-0 md:w-1/2">
+                <img
+                  th:if="${not #strings.isEmpty(banner.customImg)}"
+                  th:src="${banner.customImg}"
+                  th:alt="${banner.customTitle}"
+                  class="h-60 w-full rounded-2xl object-cover md:h-72 xl:h-90"
+                />
+              </div>
+              <div class="flex w-full flex-col justify-center gap-3 p-2 md:w-1/2 md:gap-4 md:p-0 lg:gap-6">
+                <div class="flex items-center gap-2" th:if="${not #strings.isEmpty(banner.customTag)}">
+                  <span class="hidden h-px w-3 bg-gray-400 md:block dark:bg-white/20"></span>
+                  <p class="text-xs font-semibold tracking-[0.15em] text-gray-500 uppercase dark:text-white/50" th:text="${banner.customTag}"></p>
+                </div>
+                <h2 class="text-2xl leading-[1.1] font-medium text-gray-900 md:text-4xl dark:text-white" th:if="${not #strings.isEmpty(banner.customTitle)}">
+                  <span th:text="${banner.customTitle}">一隅 · BY 無.Flac</span>
+                </h2>
+                <p
+                  class="text-sm leading-relaxed text-gray-600 md:text-base dark:text-white/80"
+                  th:if="${not #strings.isEmpty(banner.customDesc)}"
+                  th:utext="${banner.customDesc}"
+                ></p>
+                <div class="flex items-center gap-4 pt-2" th:if="${not #strings.isEmpty(banner.customBtn) and not #strings.isEmpty(banner.customLink)}">
+                  <a
+                    th:href="${banner.customLink}"
+                    class="flex items-center gap-1.5 text-xs font-medium text-gray-900 transition-all duration-300 hover:opacity-70 md:text-sm dark:text-white"
+                    th:target="${#strings.startsWith(banner.customLink,'http') ? '_blank' : null}"
+                    rel="noreferrer"
+                  >
+                    <span th:text="${banner.customBtn}">阅读更多</span>
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
             </div>
-            <h2 class="text-2xl leading-[1.1] font-medium text-gray-900 md:text-4xl dark:text-white" th:if="${not #strings.isEmpty(hero.customTitle)}">
-              <span th:text="${hero.customTitle}">一隅 · BY 無.Flac</span>
-            </h2>
-            <p class="text-sm leading-relaxed text-gray-600 md:text-base dark:text-white/80" th:if="${not #strings.isEmpty(hero.customDesc)}" th:utext="${hero.customDesc}"></p>
-            <div class="flex items-center gap-4 pt-2" th:if="${not #strings.isEmpty(hero.customBtn) and not #strings.isEmpty(hero.customLink)}">
-              <a
-                th:href="${hero.customLink}"
-                class="flex items-center gap-1.5 text-xs font-medium text-gray-900 transition-all duration-300 hover:opacity-70 md:text-sm dark:text-white"
-                th:target="${#strings.startsWith(hero.customLink,'http') ? '_blank' : null}"
-                rel="noreferrer"
-              >
-                <span th:text="${hero.customBtn}">阅读更多</span>
-                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
+          </li>
+        </ul>
       </section>
     </th:block>
   </th:block>

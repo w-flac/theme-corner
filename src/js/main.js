@@ -16,6 +16,7 @@ import "./lib/themeToggle.js";
 import "./lib/mobileMenu.js";
 import "./lib/shareModal.js";
 import "./lib/upvote.js";
+import "./lib/heroSwiper.js";
 
 function toggleMenu(button) {
   const menu = document.getElementById("children-" + button.id);
