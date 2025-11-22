@@ -511,3 +511,41 @@ spec:
               id: gongan
               key: gongan
               label: 公安备案
+    #一般设置
+    - group: oGeneral
+      label: 一般设置
+      formSchema:
+        - $formkit: group
+          name: read
+          help: 此选项开启后可修改模版页面信息，如：归档、链接页。
+          children:
+            - $formkit: checkbox
+              name: oGeneralAgree
+              id: oGeneralAgree
+              key: oGeneralAgree
+              label: 我已知晓注意事项
+        - $formkit: group
+          label: 归档页面 / archives
+          name: oGeneralSetting
+          if: $get(oGeneralAgree).value
+          children:
+            - $formkit: checkbox
+              name: oGeneraArchives
+              id: oGeneraArchives
+              key: oGeneraArchives
+              label: 启用
+              value: false
+            - $formkit: text
+              name: archivesTitle
+              id: archivesTitle
+              key: archivesTitle
+              label: 标题
+              value: ""
+              if: $get(oGeneraArchives).value
+            - $formkit: text
+              name: archivesDesc
+              id: archivesDesc
+              key: archivesDesc
+              label: 描述
+              value: ""
+              if: $get(oGeneraArchives).value
