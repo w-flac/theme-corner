@@ -2,7 +2,7 @@
   <div class="px-4 py-2 md:w-full md:px-6 lg:px-8">
     <nav class="flex items-center justify-between">
       <div class="flex shrink-0 items-center space-x-2 lg:w-1/5">
-        <button class="text-white transition-transform duration-200 active:scale-95 lg:hidden dark:text-gray-900" id="mobile-btn" aria-label="Open mobile menu">
+        <button class="text-white transition-transform duration-200 active:scale-95 md:hidden dark:text-gray-900" id="mobile-btn" aria-label="Open mobile menu">
           <svg class="icon h-6 w-6" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
             <path
               fill="currentColor"
@@ -26,7 +26,7 @@
           <img th:if="${theme.config.oIndex.sideWeb.site_enabled == 'custom'}" alt="logo" th:src="${theme.config.oIndex.sideWeb.custom_logo}" class="h-8 rounded-lg object-cover" />
         </a>
       </div>
-      <ul class="hidden w-3/5 items-center justify-center gap-4 text-base font-normal text-white lg:flex dark:text-black" th:with="menu = ${menuFinder.getPrimary()}">
+      <ul class="hidden items-center justify-center gap-4 text-base font-normal text-white md:flex lg:w-3/5 dark:text-black" th:with="menu = ${menuFinder.getPrimary()}">
         <th:block th:each="menuItem,iter : ${menu.menuItems}">
           <li th:if="${#lists.isEmpty(menuItem.children)}">
             <a th:href="@{${menuItem.status.href}}" th:target="${menuItem.spec.target?.value}" th:text="${menuItem.status.displayName}" class="block px-4 py-1 leading-8"></a>
@@ -53,7 +53,7 @@
           </li>
         </th:block>
       </ul>
-      <div class="flex w-1/5 items-center justify-end gap-3">
+      <div class="flex items-center justify-end gap-3 lg:w-1/5">
         <!-- 搜索按钮 -->
         <a
           class="text-white transition-transform duration-200 active:scale-95 dark:text-gray-900"
@@ -133,7 +133,7 @@
     <!-- 移动端菜单 -->
     <div
       id="mobile-menu-panel"
-      class="mobile-menu-panel pointer-events-none fixed top-14 left-1/2 z-50 w-full max-w-sm sm:max-w-md -translate-x-1/2 scale-95 transform rounded-3xl bg-gray-900 opacity-0 transition-all duration-200 ease-out lg:hidden dark:bg-gray-100"
+      class="mobile-menu-panel pointer-events-none fixed top-14 left-1/2 z-50 w-full max-w-sm -translate-x-1/2 scale-95 transform rounded-3xl bg-gray-900 opacity-0 transition-all duration-200 ease-out sm:max-w-md lg:hidden dark:bg-gray-100"
       style="max-height: 80vh; overflow-y: auto"
       aria-hidden="true"
     >
