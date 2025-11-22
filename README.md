@@ -62,12 +62,6 @@
 
 ![](/images/main.webp)
 
-<p align="center">
-  💬 <strong  style="font-size: 20px">微信交流群</strong><br>
-  <img src="https://images.parlo.cc/WECHAT.png" alt="微信交流群" width="180" style="border-radius: 8px; margin-top: 6px;"><br>
-  <em style="font-size: 14px; color: gray;">有效期至：2025年11月19日</em>
-</p>
-
 ## 💬 讨论
 - 如果遇到相关bug，[提issues](https://github.com/w-flac/theme-corner/issues)
 - 如果主题集成请求，[发Email](mailto:w-flac@m-imo.com)
