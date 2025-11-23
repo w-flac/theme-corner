@@ -557,3 +557,14 @@ spec:
               label: 描述
               value: ""
               if: $get(oGeneraArchives).value
+        - $formkit: group
+          label: 链接 / links
+          name: linksSetting
+          if: $get(oGeneralAgree).value
+          children:
+            - $formkit: checkbox
+              name: oGeneraLinks
+              id: oGeneraLinks
+              key: oGeneraLinks
+              label: 显示评论
+              value: false

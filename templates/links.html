@@ -4,7 +4,7 @@
   xmlns:th="https://www.thymeleaf.org"
 >
   <th:block th:fragment="content">
-    <section class="space-y-10 pt-28 pb-16 md:pt-36">
+    <section class="mx-auto max-w-5xl space-y-10 pt-28 pb-16 md:pt-36">
       <th:block th:each="group,iterStat : ${groups}">
         <div class="flex items-center gap-1">
           <svg class="icon size-8 shrink-0" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
@@ -46,6 +46,13 @@
           </li>
         </ul>
       </th:block>
+      <div
+        id="page-comment-section"
+        class="mt-16 rounded-2xl border border-gray-200/70 bg-white/70 px-4 py-8 md:p-8 dark:border-white/10 dark:bg-white/5"
+        th:if="${(theme.config.oGeneral.linksSetting.oGeneraLinks ?: false) and (haloCommentEnabled ?: false)}"
+      >
+        <halo:comment group="plugin.halo.run" kind="Plugin" th:attr="name=${pluginName}" />
+      </div>
     </section>
   </th:block>
 </html>
