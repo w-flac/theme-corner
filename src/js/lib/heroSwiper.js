@@ -2,7 +2,7 @@
 // 📦 导入依赖
 // ==========================================
 import Swiper from "swiper";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 
 // ==========================================
 // 🎠 初始化 Swiper
@@ -23,15 +23,22 @@ window.addEventListener("DOMContentLoaded", () => {
 
   try {
     const swiper = new Swiper(swiperEl, {
-      modules: [Autoplay],
+      modules: [Autoplay, Pagination],
       direction: "horizontal", // 水平方向（从左到右）
-      spaceBetween: 0, // 无缝切换
-      centeredSlides: true,
+      spaceBetween: 30, // 无缝切换
       loop: true, // 循环播放
       speed: 1000, // 滑动动画速度
       autoplay: {
         delay: 5000, // 5秒切换
-        disableOnInteraction: false, // 用户交互后继续自动播放
+        disableOnInteraction: false,
+        // 用户交互后继续自动播放
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+        renderBullet: function (index, className) {
+          return '<span class="' + className + '"></span>';
+        },
       },
     });
     console.log("✅ Swiper 初始化成功", swiper);

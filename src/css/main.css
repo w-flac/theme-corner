@@ -57,13 +57,13 @@
     @apply wrap-break-word break-all;
 }
 .swiper-pagination-bullet {
-    width: 25px;
+    width: 10px;
     height: 5px;
     border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.5);
+    @apply bg-gray-400/50 dark:bg-white/60;
     transition: all 0.3s ease;
 }
 .swiper-pagination-bullet-active {
-    width: 35px;
-    @apply bg-gray-300/60 dark:bg-white/30 ;
+    width: 20px;
+    @apply bg-gray-600/40 dark:bg-white/80;
 }
