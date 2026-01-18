@@ -1,36 +1,19 @@
-/* 自定义字体 */
-@font-face {
-  font-family: 'CustomFont';
-  src: url('../fonts/font.woff2') format('woff2'),
-       url('../fonts/font.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
 @theme{
     --color-primary: #53b175;
     --spacing-112: 28rem;
     --spacing-120: 30rem;
     --spacing-128: 32rem;
-    --font-family-sans: 'CustomFont', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
-@layer base {
-    * {
-        font-family: 'CustomFont', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    }
+    --font-sans: "Space Grotesk", "Noto Sans SC", -apple-system, "Microsoft YaHei", "PingFang SC", sans-serif;
 }
 
-@layer utilities {
-    .scrollbar-hide {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
+/* 隐藏滚动条 */
+@utility scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
 
-    .scrollbar-hide::-webkit-scrollbar {
-        display: none;
-    }
-
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
 }
 
 .prose :where(blockquote p,code)::before,
