@@ -27,12 +27,12 @@ spec:
             - $formkit: attachment
               if: "$get(site_enabled).value === 'custom'"
               accepts:
-                - 'image/*'
+                - "image/*"
               name: custom_logo
               id: custom_logo
               key: custom_logo
               label: Logo
-              value: ''
+              value: ""
         #Hero展示
         - $formkit: group
           label: Hero模块
@@ -40,7 +40,7 @@ spec:
           help: 自定义Hero显示规则
           children:
             #Hero开关
-            - $formkit: checkbox
+            - $formkit: switch
               name: Hero_enabled
               id: Hero_enabled
               key: Hero_enabled
@@ -53,7 +53,7 @@ spec:
               label: 类型
               if: $get(Hero_enabled).value
               placeholder: 请选择类型
-              value: ''
+              value: ""
               options:
                 - label: 选择文章
                   value: selectPost
@@ -67,25 +67,32 @@ spec:
               label: 文章
               validation: required
               if: $get(style).value === 'selectPost'
-              value: ''
+              value: ""
             #自定义
-            - $formkit: repeater
+            - $formkit: array
               name: customHero
               id: customHero
               key: customHero
               label: 大屏展示图
               if: $get(style).value === 'customPost'
               value: []
+              itemLabels:
+                - type: image
+                  label: $value.customImg
+                - type: text
+                  label: $value.customTag
+                - type: text
+                  label: $value.customTitle
               children:
                 - $formkit: attachment
                   accepts:
-                    - 'image/*'
+                    - "image/*"
                   name: customImg
                   id: customImg
                   key: customImg
                   label: 图片
                   help: 请选择图片
-                  value: ''
+                  value: ""
                   if: $get(style).value === 'customPost'
                 - $formkit: text
                   name: customTag
@@ -131,7 +138,7 @@ spec:
           label: 文章显示
           name: Blog
           children:
-            - $formkit: checkbox
+            - $formkit: switch
               name: blog_enabled
               id: blog_enabled
               key: blog_enabled
@@ -172,22 +179,34 @@ spec:
                   id: moreTitle
                   key: moreTitle
                   label: 标题
-                  value: '探索更多精彩内容，发现更多故事'
+                  value: "探索更多精彩内容，发现更多故事"
                 - $formkit: text
                   name: moreLink
                   id: moreLink
                   key: moreLink
                   label: 提示
-                  value: '查看更多'
+                  value: "查看更多"
     #分类模块
     - group: oCat
       label: 分类模块
       formSchema:
-        - $formkit: checkbox
+        - $formkit: switch
           name: oCat_enabled
           id: oCat_enabled
           key: oCat_enabled
           label: 启用分类展示
+        - $formkit: select
+          name: oCat_style
+          id: oCat_style
+          key: oCat_style
+          label: 分类展示样式
+          value: default
+          if: $get(oCat_enabled).value
+          options:
+            - label: 常规
+              value: default
+            - label: 列表
+              value: list
         - $formkit: group
           label: 分类展示
           name: Category
@@ -206,11 +225,12 @@ spec:
               label: 描述
               value: ""
             - $formkit: repeater
+              if: $get(oCat_style).value == "default"
               name: categoryList
               id: categoryList
               key: categoryList
               label: 分类选择
-              value: [ ]
+              value: []
               children:
                 - $formkit: text
                   name: categoryItem_title
@@ -232,121 +252,139 @@ spec:
                   key: categoryItem_list
                   label: 子分类
                   multiple: true
-                  value: [ ]
+                  value: []
+            - $formkit: categorySelect
+              if: $get(oCat_style).value == "list"
+              name: categoryItem_list
+              id: categoryItem_list
+              key: categoryItem_list
+              label: 分类选择
+              value: []
+              multiple: true
+              validation: required
     #链接模块
     - group: oFriends
       label: 链接模块
       formSchema:
-          - $formkit: checkbox
-            name: friends_enabled
-            id: friends_enabled
-            key: friends_enabled
-            label: 启用链接展示
-          - $formkit: group
-            label: 链接展示
-            name: Friends
-            id: Friends
-            key: Friends
-            if: $get(friends_enabled).value
-            children:
-              - $formkit: text
-                name: friendsTitle
-                id: friendsTitle
-                key: friendsTitle
-                label: 标题
-                value: ""
-              - $formkit: text
-                name: friendsDesc
-                id: friendsDesc
-                key: friendsDesc
-                label: 描述
-                value: ""
-              - $formkit: select
-                name: friendsStyle
-                id: friendsStyle
-                key: friendsStyle
-                label: 样式
-                value: links
-                options:
-                  - label: 链接/Links
-                    value: links
-                  - label: 自定义
-                    value: custom
-              - $formkit: select
-                name: linkName
-                id: linkName
-                key: linkName
-                label: 选择分组
-                if: "$get(friendsStyle).value === 'links'"
-                help: 此选项需要链接插件支持
-                clearable: true
-                action: /apis/core.halo.run/v1alpha1/linkgroups
+        - $formkit: switch
+          name: friends_enabled
+          id: friends_enabled
+          key: friends_enabled
+          label: 启用链接展示
+        - $formkit: group
+          label: 链接展示
+          name: Friends
+          id: Friends
+          key: Friends
+          if: $get(friends_enabled).value
+          children:
+            - $formkit: text
+              name: friendsTitle
+              id: friendsTitle
+              key: friendsTitle
+              label: 标题
+              value: ""
+            - $formkit: text
+              name: friendsDesc
+              id: friendsDesc
+              key: friendsDesc
+              label: 描述
+              value: ""
+            - $formkit: select
+              name: friendsStyle
+              id: friendsStyle
+              key: friendsStyle
+              label: 样式
+              value: links
+              options:
+                - label: 链接/Links
+                  value: links
+                - label: 自定义
+                  value: custom
+            - $formkit: select
+              name: linkName
+              id: linkName
+              key: linkName
+              label: 选择分组
+              if: "$get(friendsStyle).value === 'links'"
+              help: 此选项需要链接插件支持
+              clearable: true
+              action: /apis/core.halo.run/v1alpha1/linkgroups
+              validation: required
+              requestOption:
+                method: GET
+                pageField: page
+                sizeField: size
+                totalField: total
+                itemsField: items
+                labelField: spec.displayName
+                valueField: metadata.name
                 validation: required
-                requestOption:
-                  method: GET
-                  pageField: page
-                  sizeField: size
-                  totalField: total
-                  itemsField: items
-                  labelField: spec.displayName
-                  valueField: metadata.name
+        - $formkit: group
+          label: 自定义列表
+          name: Custom
+          if: "$get(friendsStyle).value === 'custom'"
+          children:
+            - $formkit: array
+              name: customLinks
+              id: customLinks
+              key: customLinks
+              value: []
+              itemLabels:
+                - type: image
+                  label: $value.customLink_icon
+                - type: text
+                  label: $value.customLink_title
+                - type: text
+                  label: $value.customLink_url
+                - type: text
+                  label: $value.customLink_tag
+              children:
+                - $formkit: attachment
+                  name: customLink_icon
+                  id: customLink_icon
+                  key: customLink_icon
+                  label: 图标
+                  accepts:
+                    - "image/png"
+                  value: ""
+                - $formkit: text
+                  name: customLink_tag
+                  id: customLink_tag
+                  key: customLink_tag
+                  label: 标签
                   validation: required
-          - $formkit: group
-            label: 自定义选项
-            name: Custom
-            if: "$get(friendsStyle).value === 'custom'"
-            children:
-              - $formkit: repeater
-                name: customLinks
-                id: customLinks
-                key: customLinks
-                label: 链接
-                value: [ ]
-                children:
-                  - $formkit: text
-                    name: customLink_icon
-                    id: customLink_icon
-                    key: customLink_icon
-                    label: 图标
-                    value: ""
-                    validation: required
-                  - $formkit: text
-                    name: customLink_tag  
-                    id: customLink_tag
-                    key: customLink_tag
-                    label: 标签
-                    validation: required
-                  - $formkit: text
-                    name: customLink_title
-                    id: customLink_title
-                    key: customLink_title
-                    label: 标题
-                    value: ""
-                    validation: required
-                  - $formkit: text
-                    name: customLink_desc
-                    id: customLink_desc
-                    key: customLink_desc
-                    label: 描述
-                  - $formkit: text
-                    name: customLink_url
-                    id: customLink_url
-                    key: customLink_url
-                    label: 链接
-                    value: ""
-                    validation: required
-                  - $formkit: text
-                    name: customLink_time
-                    id: customLink_time
-                    key: customLink_time
-                    label: 时间
-                    value: ""
-                    validation: required
+                - $formkit: text
+                  name: customLink_title
+                  id: customLink_title
+                  key: customLink_title
+                  label: 标题
+                  value: ""
+                  validation: required
+                - $formkit: text
+                  name: customLink_desc
+                  id: customLink_desc
+                  key: customLink_desc
+                  label: 描述
+                - $formkit: text
+                  name: customLink_url
+                  id: customLink_url
+                  key: customLink_url
+                  label: 链接
+                  value: ""
+                  validation: required
+                - $formkit: text
+                  name: customLink_time
+                  id: customLink_time
+                  key: customLink_time
+                  label: 时间
+                  value: ""
+                  validation: required
     #关于模块
     - group: oInfo
       label: 关于模块
       formSchema:
-        - $formkit: checkbox
+        - $formkit: switch
           name: info_enabled
           id: info_enabled
           key: info_enabled
@@ -377,10 +415,10 @@ spec:
           children:
             - $formkit: attachment
               accepts:
-                - 'image/*'
+                - "image/*"
               name: infoUser_logo
               label: 头像
-              value: ''
+              value: ""
               validation: required
             - $formkit: text
               name: infoUser_name
@@ -396,19 +434,32 @@ spec:
               label: 标签
               value: ""
               validation: required
-            - $formkit: text
+            - $formkit: code
               name: infoUser_desc
               id: infoUser_desc
               key: infoUser_desc
               label: 描述
-              value: ""
+              height: 100px
+              language: html
               validation: required
+        - $formkit: select
+          if: $get(info_enabled).value
+          name: infoSocial_type
+          id: infoSocial_type
+          key: infoSocial_type
+          label: 社交配置
+          placeholder: 请选择
+          options:
+            - value: default
+              label: 置入个人信息
+            - value: infoOther
+              label: 置入其他信息
         - $formkit: group
+          if: "$get(infoSocial_type).value === 'infoOther' || $get(infoSocial_type).value === 'default'"
           label: 社交信息
           name: infoSocial
           id: infoSocial
           key: infoSocial
-          if: $get(info_enabled).value
           children:
             - $formkit: text
               name: infoSocial_title
@@ -417,13 +468,27 @@ spec:
               label: 标题
               value: ""
               validation: required
-            - $formkit: repeater
+            - $formkit: array
               name: socialList
               id: socialList
               key: socialList
               label: 社交信息
-              value: [ ]
+              value: []
+              itemLabels:
+                - type: iconify
+                  label: $value.socialItem_icon
+                - type: text
+                  label: $value.socialItem_title
+                - type: text
+                  label: $value.socialItem_url
               children:
+                - $formkit: iconify
+                  name: socialItem_icon
+                  id: socialItem_icon
+                  key: socialItem_icon
+                  label: 图标
+                  format: svg
+                  help: 建议大小设置为"100%"
                 - $formkit: text
                   name: socialItem_title
                   id: socialItem_title
@@ -438,21 +503,10 @@ spec:
                   label: 链接
                   value: ""
                   validation: required
-                - $formkit: code
-                  name: socialItem_icon
-                  id: socialItem_icon
-                  key: socialItem_icon
-                  label: 图标
-                  language: html
-                  height: 200px
-                  help: 请输入SVG链接，建议height和width：15
-                  value: ""
-                  validation: required
-
         - $formkit: group
           label: 其它信息
+          if: $get(infoSocial_type).value == 'infoOther'
           name: infoOther
-          if: $get(info_enabled).value
           children:
             - $formkit: text
               name: infoOther_title
@@ -466,7 +520,7 @@ spec:
               id: infoOther_desc
               key: infoOther_desc
               label: 描述
-              height: 200px
+              height: 100px
               language: html
               validation: required
 
@@ -475,28 +529,28 @@ spec:
           name: infoTrend
           id: infoTrend
           key: infoTrend
-          if: $get(info_enabled).value
+          if: $get(infoSocial_type).value == 'infoOther'
           children:
-              - $formkit: text
-                name: infoTrend_title
-                id: infoTrend_title
-                key: infoTrend_title
-                label: 标题
-                value: ""
-                validation: required
-              - $formkit: code
-                name: infoTrend_desc
-                id: infoTrend_desc
-                key: infoTrend_desc
-                label: 描述
-                height: 200px
-                language: html
-                validation: required
+            - $formkit: text
+              name: infoTrend_title
+              id: infoTrend_title
+              key: infoTrend_title
+              label: 标题
+              value: ""
+              validation: required
+            - $formkit: code
+              name: infoTrend_desc
+              id: infoTrend_desc
+              key: infoTrend_desc
+              label: 描述
+              height: 100px
+              language: html
+              validation: required
     #页脚模块
     - group: oFooter
       label: 页脚模块
       formSchema:
-        - $formkit: checkbox
+        - $formkit: switch
           name: beian_enabled
           id: beian_enabled
           key: beian_enabled
@@ -537,7 +591,7 @@ spec:
           name: archivesSetting
           if: $get(oGeneralAgree).value
           children:
-            - $formkit: checkbox
+            - $formkit: switch
               name: oGeneraArchives
               id: oGeneraArchives
               key: oGeneraArchives
@@ -562,7 +616,7 @@ spec:
           name: linksSetting
           if: $get(oGeneralAgree).value
           children:
-            - $formkit: checkbox
+            - $formkit: switch
               name: oGeneraLinks
               id: oGeneraLinks
               key: oGeneraLinks
